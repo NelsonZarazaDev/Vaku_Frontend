@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router";
+import { ROUTES } from "../../constants/routeNames";
 
 export default function LoginEmployee() {
   return (
@@ -33,9 +35,9 @@ export default function LoginEmployee() {
                 Iniciar sesi&oacute;n
               </button>
             </form>
-            <p className="font-bold text-lg text-text-second mb-6">
+            <Link to={ROUTES.PATHLOGINCHILDREN} className="font-bold text-lg text-text-second mb-6">
               Eres un paciente
-            </p>
+            </Link>
           </div>
         </div>
 
