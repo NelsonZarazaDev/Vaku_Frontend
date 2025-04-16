@@ -1,11 +1,11 @@
 import React from "react";
-import LoginEmployee from "./components/loginEmployee/loginEmployee";
-import LoginChildren from "./components/loginChildren/LoginChildren";
+import { BrowserRouter } from "react-router";
+import MyRoutes from "./routes/routes";
 
 export default function App() {
   return (
-    <>
-      <LoginChildren />
-    </>
+    <BrowserRouter>
+      <MyRoutes />
+    </BrowserRouter>
   );
 }

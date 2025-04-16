@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router";
+import { ROUTES } from "../../constants/routeNames";
 
 export default function LoginChildren() {
   return (
@@ -26,16 +28,16 @@ export default function LoginChildren() {
                 Iniciar sesi&oacute;n
               </button>
             </form>
-            <p className="font-bold text-lg text-text-second mb-6">
+            <Link to={ROUTES.PATHLOGINEMPLOYEE} className="font-bold text-lg text-text-second mb-6">
               Eres un empleado
-            </p>
+            </Link>
           </div>
         </div>
 
         <div className="hidden lg:visible w-full h-dvh lg:flex lg:items-end items-center justify-center z-10 mb-74">
             <img
               className="h-[60%] before-login"
-              src="/src/assets/images/8817506.webp"
+              src="/src/assets/images/doctorChildrenLongin.webp"
               alt=""
             />
         </div>
