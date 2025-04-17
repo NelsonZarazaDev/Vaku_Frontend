@@ -1,12 +1,12 @@
 import React from "react";
-import SearchChild from "../../components/searchChild/searchChild";
 import TableSearchChildren from "../../components/tableSearchChildren/TableSearchChildren";
+import SearchChild from "../../components/searchChild/SearchChild";
 
 export default function Children() {
   return (
     <>
       <SearchChild />
-      <TableSearchChildren/>
+      <TableSearchChildren />
     </>
   );
 }

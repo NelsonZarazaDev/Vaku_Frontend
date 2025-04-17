@@ -10,7 +10,7 @@ export default function SearchChild() {
       </div>
       <div className="flex w-full px-2">
         <input
-          class="w-60 text-lg placeholder:text-gray-500 placeholder:italic border-b-2 focus:outline-hidden"
+          className="w-60 text-lg placeholder:text-gray-500 placeholder:italic border-b-2 focus:outline-hidden"
           placeholder="Buscar..."
           type="search"
           name="search"
