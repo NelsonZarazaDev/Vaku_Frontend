@@ -1,6 +1,32 @@
 @import "tailwindcss";
-@import "./assets/fonts/Poppins-Regular.css";
+@import "./assets/fonts/Montserrat.css";
 @import "./assets/fonts/LeckerliOne-Regular.css";
+
+@theme {
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-LeckerliOne: "LeckerliOne", cursive;
+
+  --color-primary: #002933;
+  --color-secondary: #dff9f6;
+  --color-bulle: #d8f6f6;
+  --color-accent: #f2c94c;
+  --color-gray: #6e7a82;
+  --color-optional:rgba(126, 126, 126, 0.93);
+  --color-accent-light: rgba(242, 201, 76, 0.51);
+  --color-surface: #ffffff;
+  --color-background: #fafafa;
+  --color-dark-cyan: #159a9c;
+  --color-dark-green: #356969;
+  --color-background-card: #afafaf;
+  --color-button: #002933;
+  --color-text: #002933;
+  --color-text-second: #356969;
+  --color-table: #e7e7e7;
+  --color-border: #e0e0e0;
+  --color-success: #27ae60;
+  --color-error: #eb5757;
+  --color-info: #2f80ed;
+}
 
 .box-shadow-card {
   -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -8,23 +34,3 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-@theme {
-  --font-LeckerliOne: "LeckerliOne";
-  --font-Poppins: "Poppins";
-
-  --color-primary: #002933;
-  --color-secondary: #dff9f6;
-  --color-bulle: #D8F6F6;
-  --color-accent: #f2c94c;
-  --color-surface: #ffffff;
-  --color-background: #fafafa;
-  --color-background-card: #afafaf;
-  --color-button: #002933;
-  --color-text: #002933;
-  --color-text-second: #356969;
-  --color-muted: #6e7a82;
-  --color-border: #e0e0e0;
-  --color-success: #27ae60;
-  --color-error: #eb5757;
-  --color-info: #2f80ed;
-}
