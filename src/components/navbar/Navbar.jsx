@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { NavLink } from "react-router";
 import { ROUTE_PATHS } from "../../constants/routePath";
+import UseCloseSession from "../../hooks/closeSession/useCloseSession";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const menuRef = useRef();
+  const {logoutAll} = UseCloseSession();
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -33,7 +35,7 @@ export default function Navbar() {
             <div className="relative" ref={menuRef}>
               <button onClick={() => setOpen(!open)}>
                 <div className="w-10 h-10 bg-blue-500 rounded-full text-white flex items-center justify-center font-bold cursor-pointer">
-                  P
+                  U
                 </div>
               </button>
 
@@ -77,7 +79,7 @@ export default function Navbar() {
 
           {open && (
             <div className="absolute right-0 mt-2 bg-white rounded-lg shadow-lg py-2 w-40 z-50">
-              <button className="block w-full text-left px-4 py-2 hover:bg-red-100 text-red-600">
+              <button onClick={logoutAll} className="block w-full text-left px-4 py-2 hover:bg-red-100 text-red-600 cursor-pointer">
                 Cerrar sesión
               </button>
             </div>
@@ -85,6 +87,7 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
+    
   );
 }
 

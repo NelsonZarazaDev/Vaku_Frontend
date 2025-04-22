@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { ROUTE_PATHS } from "../../constants/routePath";
 import useChildrenAuthStore from "../../store/authChildren/useChildrenAuthStore";
+import { showToast } from "../../components/notifyToast/NotifyToast";
 
 export default function UseLoginChildrenLogic() {
   let navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function UseLoginChildrenLogic() {
         token: token.token,
         persDocument: login.persDocument,
       });
-
+      showToast("Inicio de sesión exitoso", "success");
       navigate(ROUTE_PATHS.HOME);
     } catch (error) {
       console.log(error);

@@ -1,21 +1,20 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { API } from "../../constants/api";
 import axios from "axios";
 import useEmployeeAuthStore from "../../store/authEmployee/useEmployeeAuthStore";
 import { useNavigate } from "react-router";
 import { ROUTE_PATHS } from "../../constants/routePath";
-import { getAuthHeader } from "../../constants/authHeader";
+import { showToast } from "../../components/notifyToast/NotifyToast";
 
 export default function UseLoginEmployeeLogic() {
   let navigate = useNavigate();
-  const headers = getAuthHeader();
 
   const [login, setLogin] = useState({
     persEmail: "",
     persPassword: "",
   });
 
-  const { setEmployeeAuthStore,setEmployeeInfo  } = useEmployeeAuthStore();
+  const { setEmployeeAuthStore, setEmployeeInfo } = useEmployeeAuthStore();
 
   const onInputChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
@@ -33,6 +32,10 @@ export default function UseLoginEmployeeLogic() {
         token: token.token,
       });
 
+      const headers = {
+        Authorization: `Bearer ${token.token}`,
+      };
+
       const urlInfoEmployee = `${API.APIINFOEMPLOYEE}${login.persEmail}`;
       const result = await axios.get(urlInfoEmployee, { headers });
 
@@ -45,7 +48,11 @@ export default function UseLoginEmployeeLogic() {
         emplToken: result.data[0].emplToken,
       });
 
-      navigate(ROUTE_PATHS.HOME);
+      showToast("Inicio de sesión exitoso", "success");
+
+      setTimeout(() => {
+        navigate(ROUTE_PATHS.HOME);
+      }, 2200);
     } catch (error) {
       console.log(error);
     }

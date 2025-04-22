@@ -22,6 +22,19 @@ const useEmployeeAuthStore = create((set) => ({
       persRole: info.persRole,
       emplToken: info.emplToken,
     }),
+
+  reset: () =>
+    set({
+      token: null,
+      employeeInfo: {
+        persEmail: "",
+        persDocument: "",
+        persNames: "",
+        persLastNames: "",
+        persRole: "",
+        emplToken: "",
+      },
+    }),
 }));
 
 export default useEmployeeAuthStore;
