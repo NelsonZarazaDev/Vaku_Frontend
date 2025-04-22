@@ -4,4 +4,6 @@ export const API = {
   APILOGINEMPLOYEE: `${API_BASE_URL}/auth/login`,
   APILOGINCHILDREN: `${API_BASE_URL}/auth/loginChild`,
   APIINFOEMPLOYEE:`${API_BASE_URL}/employee/`,
+  APIOVERDUEVACCINATIONS: `${API_BASE_URL}/overdueVaccinations`,
+  APINOTIFYEMAIL:`${API_BASE_URL}/overdueVaccinations/send-emails`,
 };
