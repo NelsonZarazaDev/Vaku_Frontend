@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { NavLink } from "react-router";
 import { ROUTE_PATHS } from "../../constants/routePath";
-import UseCloseSession from "../../hooks/closeSession/useCloseSession";
+import UseCloseSession from "../../hooks/closeSession/UseCloseSession";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
