@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function RegistrationEmployee() {
+export default function RegisterEmployee() {
   return (
     <>
       <div className="px-5 md:px-20 w-full h-36 flex justify-center items-center">

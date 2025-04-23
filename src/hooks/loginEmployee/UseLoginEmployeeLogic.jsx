@@ -50,9 +50,9 @@ export default function UseLoginEmployeeLogic() {
 
       showToast("Inicio de sesión exitoso", "success");
 
-      setTimeout(() => {
+
         navigate(ROUTE_PATHS.HOME);
-      }, 2200);
+
     } catch (error) {
       console.log(error);
     }
