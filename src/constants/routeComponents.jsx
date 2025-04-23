@@ -4,8 +4,8 @@ import LoginEmployee from "../components/loginEmployee/LoginEmployee";
 import Priority from "../pages/priority/Priority";
 import Employees from "../pages/employees/Employees";
 import Inventory from "../pages/inventory/Inventory";
-import RegistrationChildren from "../pages/registrationChildren/RegistrationChildren";
-import RegistrationEmployee from "../pages/registrationEmployee/RegistrationEmployee";
+import RegisterFatherSon from "../pages/registerFatherSon/RegisterFatherSon"
+import RegisterEmployee from "../pages/registerEmployee/RegisterEmployee";
 import Home from "../pages/home/Home";
 
 export const ROUTE_COMPONENTS = {
@@ -14,8 +14,8 @@ export const ROUTE_COMPONENTS = {
   HOME: <Home/>,
   CHILDREN: <Children />,
   PRIORITY: <Priority />,
-  REGISTRATION_CHILDREN: <RegistrationChildren />,
-  REGISTRATION_EMPLOYEE: <RegistrationEmployee />,
+  REGISTRATION_CHILDREN: <RegisterFatherSon/> ,
+  REGISTRATION_EMPLOYEE: <RegisterEmployee />,
   EMPLOYEES: <Employees />,
   INVENTORY: <Inventory />,
 };
