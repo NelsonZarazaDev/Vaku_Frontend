@@ -11,7 +11,7 @@
   --color-bulle: #d8f6f6;
   --color-accent: #f2c94c;
   --color-gray: #6e7a82;
-  --color-optional:rgba(126, 126, 126, 0.93);
+  --color-optional: rgba(126, 126, 126, 0.93);
   --color-accent-light: rgba(242, 201, 76, 0.51);
   --color-surface: #ffffff;
   --color-background: #fafafa;
@@ -34,3 +34,6 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+input:disabled {
+  background: #ccc;
+}

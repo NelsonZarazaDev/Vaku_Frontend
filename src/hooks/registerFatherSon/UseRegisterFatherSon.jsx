@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useState } from "react";
 import { API } from "../../constants/api";
 import { getAuthHeader } from "../../constants/authHeader";
 import axios from "axios";
 import { showToast } from "../../components/notifyToast/NotifyToast";
-import useDepartmentStore from "../../store/Department/useDepartmentStore";
 
 export default function UseRegisterFatherSon() {
   const headers = getAuthHeader();
@@ -34,7 +32,6 @@ export default function UseRegisterFatherSon() {
     },
   ];
 
-
   const [fatherSonData, setFatherSonData] = useState(initialData);
 
   const onInputChange = (e) => {
@@ -56,16 +53,16 @@ export default function UseRegisterFatherSon() {
     e.preventDefault();
 
     try {
-      const url = API.APIREGISTERFATHERSON;
-      console.log("Headers:", headers);
-      console.log("datos:", fatherSonData);
-      console.log(JSON.stringify(fatherSonData, null, 2));
+      const url = API.APIREGISTERFATHERSONANDEMPLOYEE;
       const response = await axios.post(url, fatherSonData, { headers });
       showToast("Datos registrados con exito", "success");
       setFatherSonData(initialData);
-      console.log(response);
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          showToast(error.response.data?.message, "error");
+        }
+      }
     }
   };
 

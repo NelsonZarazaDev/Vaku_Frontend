@@ -1,6 +1,8 @@
 import React from "react";
 import UseCity from "../../hooks/city/UseCity";
 import useDepartmentStore from "../../store/Department/useDepartmentStore";
+import { showToast } from "../../components/notifyToast/NotifyToast";
+
 
 export default function City({name, id, value, onChange}) {
   const { cityData, fetchCityData } = UseCity();
@@ -19,7 +21,7 @@ export default function City({name, id, value, onChange}) {
           if (depaId) {
             fetchCityData(depaId);
           } else {
-            console.log("Selecciona primero un departamento 🏞️");
+            showToast("Selecciona primero un departamento", "info");
           }
         }}
       >

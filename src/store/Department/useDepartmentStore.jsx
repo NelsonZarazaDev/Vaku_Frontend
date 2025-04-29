@@ -1,4 +1,3 @@
-// src/store/useDepartmentStore.js
 import { create } from "zustand";
 
 const useDepartmentStore = create((set) => ({

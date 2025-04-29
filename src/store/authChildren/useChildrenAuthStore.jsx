@@ -1,12 +1,28 @@
 import { create } from "zustand";
 
 const useChildrenAuthStore = create((set) => ({
-  token: null,
+  tokenChildren: null,
   persDocument: null,
+  idChildren: null,
+  emailParent: null,
+  idVaccine: null,
   setChildrenAuthStore: (data) =>
-    set({ token: data.token, persDocument: data.persDocument }),
+    set({
+      tokenChildren: data.token,
+      persDocument: data.persDocument,
+      idChildren: data.idChildren,
+      emailParent: data.emailParent,
+      idVaccine: data.idVaccine,
+    }),
 
-  reset: () => set({ token: null, persDocument: null }),
+  reset: () =>
+    set({
+      tokenChildren: null,
+      persDocument: null,
+      idChildren: null,
+      emailParent: null,
+      idVaccine: null,
+    }),
 }));
 
 export default useChildrenAuthStore;

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import UseDepartment from "../../hooks/department/UseDepartment";
-import UseCity from "../../hooks/city/UseCity";
 import useDepartmentStore from "../../store/Department/useDepartmentStore";
 
 export default function Department() {

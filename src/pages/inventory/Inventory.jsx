@@ -6,7 +6,7 @@ export default function Inventory() {
   return (
     <>
       <Department />
-      <City/>
+      <City />
     </>
   );
 }

@@ -11,16 +11,21 @@ const useEmployeeAuthStore = create((set) => ({
     persLastNames: "",
     persRole: "",
     emplToken: "",
+    idEmpl: null,
   },
 
   setEmployeeInfo: (info) =>
+    
     set({
-      persEmail: info.persEmail,
-      persDocument: info.persDocument,
-      persNames: info.persNames,
-      persLastNames: info.persLastNames,
-      persRole: info.persRole,
-      emplToken: info.emplToken,
+      employeeInfo: {
+        persEmail: info.persEmail,
+        persDocument: info.persDocument,
+        persNames: info.persNames,
+        persLastNames: info.persLastNames,
+        persRole: info.persRole,
+        emplToken: info.emplToken,
+        idEmpl: info.idEmpl,
+      },
     }),
 
   reset: () =>
@@ -33,6 +38,7 @@ const useEmployeeAuthStore = create((set) => ({
         persLastNames: "",
         persRole: "",
         emplToken: "",
+        idEmpl: null,
       },
     }),
 }));
