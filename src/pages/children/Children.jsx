@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import TableSearchChildren from "../../components/tableSearchChildren/TableSearchChildren";
 import SearchChild from "../../components/searchChild/SearchChild";
 
 export default function Children() {
+  const [childResultData, setChildResultData] = useState(null);
   return (
     <>
-      <SearchChild />
-      <TableSearchChildren />
+      <SearchChild onResult={setChildResultData} />
+      <TableSearchChildren data={childResultData} />
     </>
   );
 }

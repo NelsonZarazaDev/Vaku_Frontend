@@ -46,15 +46,21 @@ export default function UseLoginEmployeeLogic() {
         persLastNames: result.data[0].persLastNames,
         persRole: result.data[0].persRole,
         emplToken: result.data[0].emplToken,
-      });
+        idEmpl: result.data[0].emplId,
+      });      
 
       showToast("Inicio de sesión exitoso", "success");
 
-
-        navigate(ROUTE_PATHS.HOME);
-
+      navigate(ROUTE_PATHS.HOME);
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          showToast(
+            error.response.data?.message || "Correo o contraseña erróneo",
+            "error"
+          );
+        }
+      }
     }
   };
 

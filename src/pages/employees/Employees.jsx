@@ -13,13 +13,6 @@ export default function Employees() {
       <div className="px-5 md:px-20 w-full">
         <div class="grid gap-y-6 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-6">
           <EmployesUserCard />
-          <EmployesUserCard />
-          <EmployesUserCard />
-          <EmployesUserCard />
-          <EmployesUserCard />
-          <EmployesUserCard />
-          <EmployesUserCard />
-          <EmployesUserCard />
         </div>
       </div>
     </>

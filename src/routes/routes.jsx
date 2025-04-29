@@ -15,6 +15,7 @@ export default function MyRoutes() {
       <Route path={ROUTE_PATHS.REGISTRATION_EMPLOYEE} element={ROUTE_COMPONENTS.REGISTRATION_EMPLOYEE} />
       <Route path={ROUTE_PATHS.EMPLOYEES} element={ROUTE_COMPONENTS.EMPLOYEES} />
       <Route path={ROUTE_PATHS.INVENTORY} element={ROUTE_COMPONENTS.INVENTORY} />
+      <Route path={ROUTE_PATHS.VACCINATIONCARD} element={ROUTE_COMPONENTS.VACCINATION_CARD} />
     </Route>
   </Routes>
   );

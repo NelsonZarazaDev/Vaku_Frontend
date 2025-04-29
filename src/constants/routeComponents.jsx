@@ -4,17 +4,19 @@ import LoginEmployee from "../components/loginEmployee/LoginEmployee";
 import Priority from "../pages/priority/Priority";
 import Employees from "../pages/employees/Employees";
 import Inventory from "../pages/inventory/Inventory";
-import RegisterFatherSon from "../pages/registerFatherSon/RegisterFatherSon"
+import RegisterFatherSon from "../pages/registerFatherSon/RegisterFatherSon";
 import RegisterEmployee from "../pages/registerEmployee/RegisterEmployee";
 import Home from "../pages/home/Home";
+import VaccinationCard from "../pages/vaccinationCard/VaccinationCard";
 
 export const ROUTE_COMPONENTS = {
   LOGIN_CHILDREN: <LoginChildren />,
   LOGIN_EMPLOYEE: <LoginEmployee />,
-  HOME: <Home/>,
+  HOME: <Home />,
+  VACCINATION_CARD: <VaccinationCard />,
   CHILDREN: <Children />,
   PRIORITY: <Priority />,
-  REGISTRATION_CHILDREN: <RegisterFatherSon/> ,
+  REGISTRATION_CHILDREN: <RegisterFatherSon />,
   REGISTRATION_EMPLOYEE: <RegisterEmployee />,
   EMPLOYEES: <Employees />,
   INVENTORY: <Inventory />,

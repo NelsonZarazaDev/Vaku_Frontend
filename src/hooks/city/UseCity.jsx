@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getAuthHeader } from "../../constants/authHeader";
 import { API } from "../../constants/api";
 import axios from "axios";
@@ -15,7 +15,11 @@ export default function UseCity() {
       const result = await axios.get(url, { headers });
       setCityData(result.data);
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          showToast("Ah ocurrido un error inesperado", "error");
+        }
+      }
     }
   };
 

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAuthHeader } from "../../constants/authHeader";
 import { API } from "../../constants/api";
 import axios from "axios";
+import { showToast } from "../../components/notifyToast/NotifyToast";
 
 export default function UsePriority() {
   const headers = getAuthHeader();
@@ -14,7 +15,7 @@ export default function UsePriority() {
         const result = await axios.get(url, { headers });
         SetPriorityData(result.data);
       } catch (error) {
-        console.error("Error al obtener prioridad:", error);
+        showToast("Error al ver la prioridad", "error");
       }
     };
     fetchPriority();

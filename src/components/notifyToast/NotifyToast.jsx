@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export const showToast = (message, type = "default") => {
     const config = {
