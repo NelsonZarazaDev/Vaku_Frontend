@@ -31,10 +31,18 @@ export default function UseLoginChildrenLogic() {
         token: token.token,
         persDocument: login.persDocument,
       });
+
       showToast("Inicio de sesión exitoso", "success");
-      navigate(ROUTE_PATHS.HOME);
+      navigate(`${ROUTE_PATHS.HOME}/${ROUTE_PATHS.VACCINATIONCARD}`);
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          showToast(
+            error.response.data?.message || "Documento erróneo",
+            "error"
+          );
+        }
+      }
     }
   };
 

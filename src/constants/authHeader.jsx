@@ -1,12 +1,13 @@
-import useEmployeeAuthStore from '../store/authEmployee/useEmployeeAuthStore';
+import useChildrenAuthStore from "../store/authChildren/useChildrenAuthStore";
+import useEmployeeAuthStore from "../store/authEmployee/useEmployeeAuthStore";
 
 export const getAuthHeader = () => {
-    const { token } = useEmployeeAuthStore.getState();
-    console.log(token);
-    
-    return {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    };
+  const { token } = useEmployeeAuthStore.getState();
+  const { tokenChildren } = useChildrenAuthStore.getState();
+
+  return {
+    Authorization: `Bearer ${token || tokenChildren}`,
+    Accept: "application/json",
+    "Content-Type": "application/json",
   };
+};
