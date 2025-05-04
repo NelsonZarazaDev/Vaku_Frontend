@@ -5,9 +5,9 @@ export const showToast = (message, type = "default") => {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
-      newestOnTop: false,
-      closeOnClick: false,
-      rtl: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
       theme: "light",
     };
   

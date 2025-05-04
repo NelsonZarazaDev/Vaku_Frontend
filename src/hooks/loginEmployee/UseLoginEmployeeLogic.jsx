@@ -55,13 +55,17 @@ export default function UseLoginEmployeeLogic() {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
-          showToast(
-            error.response.data?.message || "Correo o contraseña erróneo",
-            "error"
-          );
+          const data = error.response.data;
+          if (typeof data === "object") {
+            Object.entries(data).forEach(([_, message]) => {
+              showToast(message, "error");
+            });            
+          } else {
+            showToast("Error inesperado en el servidor", "error");
+          }
         }
       }
-    }
+    } 
   };
 
   return {
