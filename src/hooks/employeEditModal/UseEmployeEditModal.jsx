@@ -24,7 +24,7 @@ export default function UseEmployeEditModal({ empleado }) {
         persNames: empleado.persNames || "",
         persLastNames: empleado.persLastNames || "",
         persEmail: empleado.persEmail || "",
-        persPhone: empleado.persPhone || 0,
+        persPhone: empleado.persPhone || "",
         persPassword: empleado.persPassword || "",
         persRole: empleado.persRole || "",
         emplToken: empleado.emplToken || "", // Usar emplToken aquí
@@ -54,15 +54,20 @@ export default function UseEmployeEditModal({ empleado }) {
     const url = `${API.APIEDITEMPLOYEE}/${dataToSend.emplToken}?state=${dataToSend.emplState}`;
 
     try {
+      console.log(dataToSend);
       const response = await axios.put(url, dataToSend, { headers });
       showToast("Datos actualizados con éxito", "success");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
-          showToast(
-            error.response.data?.message,
-            "error"
-          );
+          const data = error.response.data;
+          if (typeof data === "object") {
+            Object.entries(data).forEach(([_, message]) => {
+              showToast(message, "error");
+            });
+          } else {
+            showToast("Error inesperado en el servidor", "error");
+          }
         }
       }
     }

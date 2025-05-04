@@ -41,10 +41,17 @@ export default function UseSendVaccineApplied() {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
-          showToast(error.response.data?.message, "error");
+          const data = error.response.data;
+          if (typeof data === "object") {
+            Object.entries(data).forEach(([_, message]) => {
+              showToast(message, "error");
+            });            
+          } else {
+            showToast("Error inesperado en el servidor", "error");
+          }
         }
       }
-    }
+    } 
   };
   return {
     registerVaccine,
