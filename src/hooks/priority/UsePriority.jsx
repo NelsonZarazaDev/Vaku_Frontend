@@ -26,7 +26,9 @@ export default function UsePriority() {
       const url = API.APINOTIFYEMAIL;
       const result = await axios.post(url, {}, { headers });
       showToast("Notificación enviada correctamente", "success");
-    } catch (error) {}
+    } catch (error) {
+      showToast("Ah ocurrido un error inesperado", "error");
+    }
   };
 
   return { priorityData, notifyEmail };

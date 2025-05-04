@@ -98,7 +98,7 @@ export default function TableVaccinationCard({ mostrarAction }) {
                       {applied ? applied.vaap_next_appointment_date : ""}
                     </td>
 
-                    {mostrarAction && applied && (
+                    {mostrarAction && !applied && (
                       <td className="p-3">
                         <button
                           onClick={() =>

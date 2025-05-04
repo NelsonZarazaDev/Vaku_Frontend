@@ -49,15 +49,23 @@ export default function UseRegisterEmployee() {
     try {
       const url = API.APIREGISTERFATHERSONANDEMPLOYEE;
       const response = await axios.post(url, employeeData, { headers });
+      console.log("try "+response);
       showToast("Datos registrados con exito", "success");
       setEmployeeData(initialData);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
-          showToast(error.response.data?.message, "error");
+          const data = error.response.data;
+          if (typeof data === "object") {
+            Object.entries(data).forEach(([_, message]) => {
+              showToast(message, "error");
+            });            
+          } else {
+            showToast("Error inesperado en el servidor", "error");
+          }
         }
       }
-    }
+    }   
   };
 
   return {

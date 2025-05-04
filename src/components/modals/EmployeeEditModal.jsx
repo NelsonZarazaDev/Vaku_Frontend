@@ -57,7 +57,7 @@ export default function EmployeeEditModal({ isOpen, onClose }) {
                   name="persPhone"
                   id="persPhone"
                   placeholder={employeeData[0].persPhone}
-                  value={employeeData.persPhone}
+                  value={employeEditData.persPhone}
                   onChange={onInputChange}
                 />
 
