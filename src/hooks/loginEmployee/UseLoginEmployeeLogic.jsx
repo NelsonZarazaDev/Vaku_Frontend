@@ -8,6 +8,7 @@ import { showToast } from "../../components/notifyToast/NotifyToast";
 
 export default function UseLoginEmployeeLogic() {
   let navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [login, setLogin] = useState({
     persEmail: "",
@@ -22,6 +23,9 @@ export default function UseLoginEmployeeLogic() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
     try {
       const url = API.APILOGINEMPLOYEE;
@@ -47,7 +51,7 @@ export default function UseLoginEmployeeLogic() {
         persRole: result.data[0].persRole,
         emplToken: result.data[0].emplToken,
         idEmpl: result.data[0].emplId,
-      });      
+      });
 
       showToast("Inicio de sesión exitoso", "success");
 
@@ -59,13 +63,14 @@ export default function UseLoginEmployeeLogic() {
           if (typeof data === "object") {
             Object.entries(data).forEach(([_, message]) => {
               showToast(message, "error");
-            });            
+            });
           } else {
             showToast("Error inesperado en el servidor", "error");
           }
         }
       }
-    } 
+      setIsSubmitting(false);
+    }
   };
 
   return {

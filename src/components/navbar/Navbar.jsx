@@ -58,27 +58,30 @@ export default function Navbar() {
             menuOpen ? "flex" : "hidden"
           } md:flex flex-col md:flex-row items-center font-bold text-text bg-surface md:w-auto box-shadow-card h-auto mt-4 md:h-14 p-2 rounded-xl md:rounded-full md:relative absolute top-full left-0 w-full z-10`}
         >
-          {persRole === ""? <ButtonCarnetPdf/> :
-          linksArray.map(({ label, user1, user2, to }, index) => {
-            if (persRole === user1 || persRole === user2) {
-              return (
-                <NavLink
-                  key={to}
-                  to={to}
-                  className={({ isActive }) =>
-                    `flex justify-center items-center w-full md:w-36 h-full 
+          {persRole === "" ? (
+            <ButtonCarnetPdf />
+          ) : (
+            linksArray.map(({ label, user1, user2, to }, index) => {
+              if (persRole === user1 || persRole === user2) {
+                return (
+                  <NavLink
+                    key={to}
+                    to={to}
+                    className={({ isActive }) =>
+                      `flex justify-center items-center w-full md:w-36 h-full 
                   ${
                     isActive ? "bg-button text-surface" : "bg-background"
                   } rounded-full transition-all duration-300 ${
-                      index !== 0 || to !== "priority" ? "-ml-6" : ""
-                    }`
-                  }
-                >
-                  {label}
-                </NavLink>
-              );
-            }
-          })}
+                        index !== 0 || to !== "priority" ? "-ml-6" : ""
+                      }`
+                    }
+                  >
+                    {label}
+                  </NavLink>
+                );
+              }
+            })
+          )}
         </div>
 
         <div className="relative hidden md:block" ref={menuRef}>
@@ -132,11 +135,5 @@ const linksArray = [
     label: "Registrar",
     user1: "Jefe de enfermería",
     to: ROUTE_PATHS.REGISTRATION_EMPLOYEE,
-  },
-  {
-    label: "Inventario",
-    user1: "Enfermera",
-    user2: "Jefe de enfermería",
-    to: ROUTE_PATHS.INVENTORY,
-  },
+  }
 ];
