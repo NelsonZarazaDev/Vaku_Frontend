@@ -8,7 +8,7 @@ export default function ButtonCarnetPdf() {
       onClick={carnetPdf}
       className="bg-button flex justify-center items-center font-bold text-surface box-shadow-card rounded-full w-40 h-10 cursor-pointer"
     >
-      Decsargar pdf
+      Descargar pdf
     </div>
   );
 }

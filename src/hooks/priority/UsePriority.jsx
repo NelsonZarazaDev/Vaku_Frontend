@@ -13,6 +13,7 @@ export default function UsePriority() {
       try {
         const url = API.APIOVERDUEVACCINATIONS;
         const result = await axios.get(url, { headers });
+        console.log("aca"+JSON.stringify(result));
         SetPriorityData(result.data);
       } catch (error) {
         showToast("Error al ver la prioridad", "error");
