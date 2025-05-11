@@ -19,7 +19,7 @@ export default function RegisterFatherSon() {
       <div className="px-5 md:px-20 mb-10">
         <div className="p-6 flex justify-between items-center box-shadow-card rounded-2xl relative">
           <form onSubmit={onSubmit} className="w-full">
-            <div className="flex w-full gap-6 font-semibold">
+            <div className="md:flex w-full gap-6 font-semibold">
               <div className="w-full space-y-4">
                 <div className="font-bold text-3xl text-dark-green">
                   Datos personales
@@ -230,9 +230,6 @@ export default function RegisterFatherSon() {
             </div>
 
             <div className="flex justify-end gap-4 mt-5">
-              <button className="flex justify-center items-center font-bold text-text box-shadow-card rounded-full w-30 h-10 cursor-pointer">
-                Cancelar
-              </button>
               <button className="bg-button flex justify-center items-center font-bold text-surface box-shadow-card rounded-full w-30 h-10 cursor-pointer">
                 Register
               </button>

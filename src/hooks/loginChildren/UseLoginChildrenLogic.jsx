@@ -8,6 +8,7 @@ import { showToast } from "../../components/notifyToast/NotifyToast";
 
 export default function UseLoginChildrenLogic() {
   let navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [login, setLogin] = useState({
     persDocument: "",
@@ -21,6 +22,9 @@ export default function UseLoginChildrenLogic() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
     try {
       const url = API.APILOGINCHILDREN;
@@ -43,6 +47,7 @@ export default function UseLoginChildrenLogic() {
           );
         }
       }
+      setIsSubmitting(false);
     }
   };
 
