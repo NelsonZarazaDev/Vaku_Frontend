@@ -68,7 +68,7 @@ export default function Navbar() {
                     key={to}
                     to={to}
                     className={({ isActive }) =>
-                      `flex justify-center items-center w-full md:w-36 h-full 
+                      `flex justify-center items-center w-full md:w-36 h-full text-center
                   ${
                     isActive ? "bg-button text-surface" : "bg-background"
                   } rounded-full transition-all duration-300 ${
@@ -132,7 +132,7 @@ const linksArray = [
     to: ROUTE_PATHS.REGISTRATION_CHILDREN,
   },
   {
-    label: "Registrar",
+    label: "Registrar Empleado",
     user1: "Jefe de enfermería",
     to: ROUTE_PATHS.REGISTRATION_EMPLOYEE,
   }

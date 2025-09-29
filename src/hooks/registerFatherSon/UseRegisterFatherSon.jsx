@@ -61,16 +61,24 @@ export default function UseRegisterFatherSon() {
       if (axios.isAxiosError(error)) {
         if (error.response) {
           const data = error.response.data;
-          if (typeof data === "object") {
+
+          if (data?.message) {
+            // Caso típico de Spring Boot
+            showToast(data.message, "error");
+          } else if (typeof data === "object") {
             Object.entries(data).forEach(([_, message]) => {
               showToast(message, "error");
-            });            
+            });
           } else {
-            showToast("Error inesperado en el servidor", "error");
+            showToast(String(data), "error"); // Por si te manda texto plano
           }
+        } else {
+          showToast("No hay respuesta del servidor", "error");
         }
+      } else {
+        showToast("Error desconocido", "error");
       }
-    } 
+    }
   };
 
   return {
