@@ -8,6 +8,7 @@ import RegisterFatherSon from "../pages/registerFatherSon/RegisterFatherSon";
 import RegisterEmployee from "../pages/registerEmployee/RegisterEmployee";
 import Home from "../pages/home/Home";
 import VaccinationCard from "../pages/vaccinationCard/VaccinationCard";
+import Audit from "../pages/audit/Audit";
 
 export const ROUTE_COMPONENTS = {
   LOGIN_CHILDREN: <LoginChildren />,
@@ -19,5 +20,6 @@ export const ROUTE_COMPONENTS = {
   REGISTRATION_CHILDREN: <RegisterFatherSon />,
   REGISTRATION_EMPLOYEE: <RegisterEmployee />,
   EMPLOYEES: <Employees />,
+  AUDIT: <Audit />,
   INVENTORY: <Inventory />,
 };

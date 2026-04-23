@@ -4,14 +4,15 @@ import useEmployeeAuthStore from "../../store/authEmployee/useEmployeeAuthStore"
 import { API } from "../../constants/api";
 import axios from "axios";
 import { getAuthHeader } from "../../constants/authHeader";
-import { showToast } from "../../components/notifyToast/NotifyToast";
+import { showApiError, showToast } from "../../components/notifyToast/NotifyToast";
 
-export default function UseSendVaccineApplied() {
+export default function UseSendVaccineApplied({ onSuccess } = {}) {
   const headers = getAuthHeader();
   const emailParent = useChildrenAuthStore((state) => state.emailParent);
   const idVaccine = useChildrenAuthStore((state) => state.idVaccine);
   const idChildren = useChildrenAuthStore((state) => state.idChildren);
   const { idEmpl } = useEmployeeAuthStore((state) => state.employeeInfo);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [registerVaccine, setRegisterVaccine] = useState({
     vaapNextAppointmentDate: "",
@@ -32,26 +33,25 @@ export default function UseSendVaccineApplied() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
     try {
-      const encodedEmail = encodeURIComponent(emailParent);
-      const url = `${API.APIREGISTERVACCINE}/${encodedEmail}`;
-      const response = await axios.post(url, registerVaccine, { headers });
+      const url = API.APIREGISTERVACCINE;
+      const payload = {
+        vaccinesApplied: registerVaccine,
+        emailFather: emailParent,
+      };
+      await axios.post(url, payload, { headers });
       showToast("Vacuna registrada exitosomente", "success");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          const data = error.response.data;
-          if (typeof data === "object") {
-            Object.entries(data).forEach(([_, message]) => {
-              showToast(message, "error");
-            });            
-          } else {
-            showToast("Error inesperado en el servidor", "error");
-          }
-        }
+      if (typeof onSuccess === "function") {
+        await onSuccess();
       }
-    } 
+    } catch (error) {
+      showApiError(error, "Error al registrar la vacuna");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return {
     registerVaccine,

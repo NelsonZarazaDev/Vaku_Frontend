@@ -2,7 +2,7 @@ import { useState } from "react";
 import { API } from "../../constants/api";
 import { getAuthHeader } from "../../constants/authHeader";
 import axios from "axios";
-import { showToast } from "../../components/notifyToast/NotifyToast";
+import { showApiError, showToast } from "../../components/notifyToast/NotifyToast";
 
 export default function UseRegisterEmployee() {
   const headers = getAuthHeader();
@@ -47,24 +47,24 @@ export default function UseRegisterEmployee() {
     e.preventDefault();
 
     try {
+      const document = employeeData[0]?.persDocument?.trim();
+      if (document) {
+        const existingPerson = await findPersonByDocument(document, headers);
+        if (existingPerson) {
+          showToast(
+            `Documento ya registrado: ${existingPerson.persNames} ${existingPerson.persLastNames}`,
+            "info"
+          );
+          return;
+        }
+      }
+
       const url = API.APIREGISTERFATHERSONANDEMPLOYEE;
-      const response = await axios.post(url, employeeData, { headers });
-      console.log("try "+response);
+      await axios.post(url, employeeData, { headers });
       showToast("Datos registrados con exito", "success");
       setEmployeeData(initialData);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          const data = error.response.data;
-          if (typeof data === "object") {
-            Object.entries(data).forEach(([_, message]) => {
-              showToast(message, "error");
-            });            
-          } else {
-            showToast("Error inesperado en el servidor", "error");
-          }
-        }
-      }
+      showApiError(error, "Error inesperado en el servidor");
     }   
   };
 
@@ -73,4 +73,17 @@ export default function UseRegisterEmployee() {
     onInputChange,
     onSubmit,
   };
+}
+
+async function findPersonByDocument(document, headers) {
+  try {
+    const url = `${API.APIPERSONBYDOCUMENT}/${document}`;
+    const response = await axios.get(url, { headers });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
+    throw error;
+  }
 }

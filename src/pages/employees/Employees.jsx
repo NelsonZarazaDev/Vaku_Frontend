@@ -3,18 +3,17 @@ import EmployesUserCard from "../../components/employesUserCard/EmployesUserCard
 
 export default function Employees() {
   return (
-    <>
-      <div className="px-5 md:px-20 w-full h-36 flex justify-between items-center">
-        <p className="font-bold text-2xl text-dark-cyan">
-          Usuarios del sistema
-        </p>
-      </div>
-
-      <div className="px-5 md:px-20 w-full">
-        <div class="grid gap-y-6 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-6">
-          <EmployesUserCard />
+    <section className="space-y-4">
+      <header className="page-header">
+        <div>
+          <h1 className="page-title">Usuarios del sistema</h1>
+          <p className="page-subtitle">Gestiona perfiles del personal autorizado.</p>
         </div>
+      </header>
+
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <EmployesUserCard />
       </div>
-    </>
+    </section>
   );
 }

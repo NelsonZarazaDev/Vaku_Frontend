@@ -10,23 +10,26 @@ export default function UseTableVaccinationCard() {
   const [vaccineCardData, setVaccineCardData] = useState([]);
   const persDocument = useChildrenAuthStore((state) => state.persDocument);
 
+  const fetchVaccineData = async () => {
+    try {
+      const urlVaccine = `${API.APIALLVACCINES}`;
+      const urlVaccineCard = `${API.APIVACCINECARD}/${persDocument}`;
+      const resultVaccine = await axios.get(urlVaccine, { headers });
+      const resultVaccineCard = await axios.get(urlVaccineCard, { headers });
+      setVaccineData(resultVaccine.data);
+      setVaccineCardData(resultVaccineCard.data);
+    } catch (error) {
+    }
+  };
+
   useEffect(() => {
-    const fetchVaccineData = async () => {
-      try {
-        const urlVaccine = `${API.APIALLVACCINES}`;
-        const urlVaccineCard = `${API.APIVACCINECARD}/${persDocument}`;
-        const resultVaccine = await axios.get(urlVaccine, { headers });
-        const resultVaccineCard = await axios.get(urlVaccineCard, { headers });
-        setVaccineData(resultVaccine.data);
-        setVaccineCardData(resultVaccineCard.data);
-      } catch (error) {
-      }
-    };
+    if (!persDocument) return;
     fetchVaccineData();
   }, [persDocument]);
 
   return {
     vaccineData,
     vaccineCardData,
+    refreshVaccinationData: fetchVaccineData,
   };
 }

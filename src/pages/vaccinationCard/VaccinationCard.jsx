@@ -1,38 +1,40 @@
 import React from "react";
+import { useLocation } from "react-router";
 import CardsInfoVaccinationCard from "../../components/cardsInfoVaccinationCard/CardsInfoVaccinationCard";
-import { LuUsersRound } from "react-icons/lu";
-import { CiBookmarkCheck } from "react-icons/ci";
+import { HiOutlineClipboardDocumentCheck, HiOutlineUserGroup } from "react-icons/hi2";
 import TableVaccinationCard from "../../components/tableVaccinationCard/TableVaccinationCard";
 
-export default function VaccinationCard({mostrarAction}) {
+export default function VaccinationCard({ mostrarAction }) {
+  const location = useLocation();
+  const actionFromRoute = location.state?.mode === "edit";
+  const canEdit = typeof mostrarAction === "boolean" ? mostrarAction : actionFromRoute;
+
   return (
-    <>
-      <div className="px-5 md:px-20 w-full h-auto mb-9">
-        <div className="w-full text-2xl text-dark-green font-bold mb-4">
-          <div className="flex items-center justify-end">
-            <div className="flex flex-col items-end">
-              <div>Datos personales</div>
-              <div>& familiares</div>
-            </div>
-            <LuUsersRound className="text-5xl text-accent ml-4" />
+    <section className="space-y-5">
+      <div className="page-header">
+        <div className="flex items-center gap-2">
+          <HiOutlineUserGroup className="icon-md text-accent" />
+          <div>
+            <h1 className="page-title">Datos del paciente y acudiente</h1>
+            <p className="page-subtitle">Resumen clinico y personal.</p>
           </div>
         </div>
-
-        <CardsInfoVaccinationCard />
-
-        <div className="w-full text-2xl text-dark-green font-bold my-7">
-          <div className="flex items-center">
-            <CiBookmarkCheck className="text-5xl text-accent mr-4" />
-            <div>
-              <div>Esquema</div>
-              <div>de vacunación</div>
-            </div>
-          </div>
-        </div>
-
-        <TableVaccinationCard mostrarAction={mostrarAction||false}/>
-
       </div>
-    </>
+
+      <CardsInfoVaccinationCard />
+
+      <div className="page-header">
+        <div className="flex items-center gap-2">
+          <HiOutlineClipboardDocumentCheck className="icon-md text-accent" />
+          <div>
+            <h2 className="page-title">Esquema de vacunacion</h2>
+          </div>
+        </div>
+      </div>
+
+      <div className="p-0">
+        <TableVaccinationCard mostrarAction={canEdit} />
+      </div>
+    </section>
   );
 }

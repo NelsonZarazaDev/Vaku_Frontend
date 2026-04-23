@@ -8,6 +8,7 @@ export const ROUTE_PATHS = {
   REGISTRATION_CHILDREN: "registerFatherSon",
   REGISTRATION_EMPLOYEE: "registerEmployee",
   EMPLOYEES: "employees",
+  AUDIT: "audit",
   INVENTORY: "inventory",
   NOT_FOUND: "*",
 };

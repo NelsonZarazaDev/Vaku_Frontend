@@ -2,7 +2,7 @@ import { useState } from "react";
 import { API } from "../../constants/api";
 import { getAuthHeader } from "../../constants/authHeader";
 import axios from "axios";
-import { showToast } from "../../components/notifyToast/NotifyToast";
+import { showApiError, showToast } from "../../components/notifyToast/NotifyToast";
 
 export default function UseRegisterFatherSon() {
   const headers = getAuthHeader();
@@ -27,7 +27,7 @@ export default function UseRegisterFatherSon() {
       persSex: "",
       persAddress: "Calle 19b #13b-78",
       persDateBirth: "",
-      persRole: "Niño",
+      persRole: "Nino",
       citys: { cityId: null },
     },
   ];
@@ -41,9 +41,9 @@ export default function UseRegisterFatherSon() {
     setFatherSonData((prevData) => {
       const updatedData = [...prevData];
       if (key === "cityId") {
-        updatedData[parseInt(index)].citys.cityId = parseInt(value, 10);
+        updatedData[parseInt(index, 10)].citys.cityId = parseInt(value, 10);
       } else {
-        updatedData[parseInt(index)][key] = value;
+        updatedData[parseInt(index, 10)][key] = value;
       }
       return updatedData;
     });
@@ -53,31 +53,28 @@ export default function UseRegisterFatherSon() {
     e.preventDefault();
 
     try {
+      const documentsToValidate = [
+        fatherSonData[0]?.persDocument?.trim(),
+        fatherSonData[1]?.persDocument?.trim(),
+      ].filter(Boolean);
+
+      for (const document of documentsToValidate) {
+        const existingPerson = await findPersonByDocument(document, headers);
+        if (existingPerson) {
+          showToast(
+            `Documento ya registrado: ${existingPerson.persNames} ${existingPerson.persLastNames}`,
+            "info"
+          );
+          return;
+        }
+      }
+
       const url = API.APIREGISTERFATHERSONANDEMPLOYEE;
-      const response = await axios.post(url, fatherSonData, { headers });
+      await axios.post(url, fatherSonData, { headers });
       showToast("Datos registrados con exito", "success");
       setFatherSonData(initialData);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          const data = error.response.data;
-
-          if (data?.message) {
-            // Caso típico de Spring Boot
-            showToast(data.message, "error");
-          } else if (typeof data === "object") {
-            Object.entries(data).forEach(([_, message]) => {
-              showToast(message, "error");
-            });
-          } else {
-            showToast(String(data), "error"); // Por si te manda texto plano
-          }
-        } else {
-          showToast("No hay respuesta del servidor", "error");
-        }
-      } else {
-        showToast("Error desconocido", "error");
-      }
+      showApiError(error, "Error al registrar la informacion");
     }
   };
 
@@ -86,4 +83,17 @@ export default function UseRegisterFatherSon() {
     onInputChange,
     onSubmit,
   };
+}
+
+async function findPersonByDocument(document, headers) {
+  try {
+    const url = `${API.APIPERSONBYDOCUMENT}/${document}`;
+    const response = await axios.get(url, { headers });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
+    throw error;
+  }
 }

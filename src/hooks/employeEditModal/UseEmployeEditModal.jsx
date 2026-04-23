@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { getAuthHeader } from "../../constants/authHeader";
 import { API } from "../../constants/api";
-import { showToast } from "../../components/notifyToast/NotifyToast";
+import { showApiError, showToast } from "../../components/notifyToast/NotifyToast";
 import axios from "axios";
 
-export default function UseEmployeEditModal({ empleado }) {
+export default function UseEmployeEditModal({ empleado, onSuccess }) {
   const headers = getAuthHeader();
 
   const [employeEditData, setEmployeEditData] = useState({
@@ -27,14 +27,18 @@ export default function UseEmployeEditModal({ empleado }) {
         persPhone: empleado.persPhone || "",
         persPassword: empleado.persPassword || "",
         persRole: empleado.persRole || "",
-        emplToken: empleado.emplToken || "", // Usar emplToken aquí
-        emplState: empleado.emplState || true,
+        emplToken: empleado.emplToken || "",
+        emplState: empleado.emplState ?? true,
       });
     }
-  }, [empleado]); // Se actualiza cuando "empleado" cambia.
+  }, [empleado]);
 
   const onInputChange = (e) => {
-    setEmployeEditData({ ...employeEditData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setEmployeEditData({
+      ...employeEditData,
+      [name]: name === "emplState" ? value === "true" : value,
+    });
   };
 
   const onSubmit = async (e) => {
@@ -54,22 +58,13 @@ export default function UseEmployeEditModal({ empleado }) {
     const url = `${API.APIEDITEMPLOYEE}/${dataToSend.emplToken}?state=${dataToSend.emplState}`;
 
     try {
-      console.log(dataToSend);
-      const response = await axios.put(url, dataToSend, { headers });
-      showToast("Datos actualizados con éxito", "success");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          const data = error.response.data;
-          if (typeof data === "object") {
-            Object.entries(data).forEach(([_, message]) => {
-              showToast(message, "error");
-            });
-          } else {
-            showToast("Error inesperado en el servidor", "error");
-          }
-        }
+      await axios.put(url, dataToSend, { headers });
+      showToast("Datos actualizados con exito", "success");
+      if (typeof onSuccess === "function") {
+        await onSuccess();
       }
+    } catch (error) {
+      showApiError(error, "Error al actualizar los datos del empleado");
     }
   };
 

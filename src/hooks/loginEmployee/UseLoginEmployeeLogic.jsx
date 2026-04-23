@@ -4,7 +4,7 @@ import axios from "axios";
 import useEmployeeAuthStore from "../../store/authEmployee/useEmployeeAuthStore";
 import { useNavigate } from "react-router";
 import { ROUTE_PATHS } from "../../constants/routePath";
-import { showToast } from "../../components/notifyToast/NotifyToast";
+import { showApiError, showToast } from "../../components/notifyToast/NotifyToast";
 
 export default function UseLoginEmployeeLogic() {
   let navigate = useNavigate();
@@ -57,18 +57,7 @@ export default function UseLoginEmployeeLogic() {
 
       navigate(ROUTE_PATHS.HOME);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          const data = error.response.data;
-          if (typeof data === "object") {
-            Object.entries(data).forEach(([_, message]) => {
-              showToast(message, "error");
-            });
-          } else {
-            showToast("Error inesperado en el servidor", "error");
-          }
-        }
-      }
+      showApiError(error, "Error inesperado en el servidor");
       setIsSubmitting(false);
     }
   };

@@ -1,94 +1,84 @@
-import React, { useState } from "react";
-import { CiEdit } from "react-icons/ci";
-import { IoEyeOutline } from "react-icons/io5";
-import ViewVaccinationCardModal from "../modals/ViewVaccinationCardModal";
+import React from "react";
+import { FiEdit2, FiEye } from "react-icons/fi";
 import useChildrenAuthStore from "../../store/authChildren/useChildrenAuthStore";
-import EditVaccinationCardModal from "../modals/EditVaccinationCardModal";
+import { useNavigate } from "react-router";
+import { ROUTE_PATHS } from "../../constants/routePath";
 
 export default function TableSearchChildren({ data }) {
   const { setChildrenAuthStore } = useChildrenAuthStore();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+  const navigate = useNavigate();
 
   const viewVaccinationCard = () => {
     setChildrenAuthStore({
       persDocument: data.childDocument,
+      idChildren: data.chilId,
+      emailParent: data.parentEmail,
     });
-    setIsModalOpen(true);
+    navigate(`${ROUTE_PATHS.HOME}/${ROUTE_PATHS.VACCINATIONCARD}`, {
+      state: { mode: "view" },
+    });
   };
 
   const editVaccinationCard = () => {
     setChildrenAuthStore({
       persDocument: data.childDocument,
+      idChildren: data.chilId,
+      emailParent: data.parentEmail,
     });
-    setIsModalEditOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const closeModalEdit = () => {
-    setIsModalEditOpen(false);
+    navigate(`${ROUTE_PATHS.HOME}/${ROUTE_PATHS.VACCINATIONCARD}`, {
+      state: { mode: "edit" },
+    });
   };
 
   return (
-    <>
-      <div className="w-full mt-15 md:mt-30 flex justify-center">
-        <div className="w-[80%] max-w-full overflow-x-auto">
-          <table className="min-w-[600px] md:min-w-full mx-auto">
-            <thead>
-              <tr className="bg-dark-cyan h-10">
-                <th className="rounded-tl-lg">Nombre</th>
-                <th className="border-x border-table">Documento</th>
-                <th className="border-x border-table">Fecha de nacimiento</th>
-                <th className="rounded-tr-lg">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data ? (
-                <tr className="bg-secondary text-center h-10">
-                  <td className="">
-                    {data.childNames} {data.childLastNames}
-                  </td>
-                  <td className="border-x border-table">
-                    {data.childDocument}
-                  </td>
-                  <td className="border-x border-table">
-                    {data.parentBirthDate}
-                  </td>
-                  <td className="">
+    <div className="mt-4 section-card p-4 sm:p-5">
+      <div className="data-table-wrap">
+        <table className="data-table min-w-[620px]">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Documento</th>
+              <th>Fecha nacimiento</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data ? (
+              <tr>
+                <td>
+                  {data.childNames} {data.childLastNames}
+                </td>
+                <td>{data.childDocument}</td>
+                <td>{data.parentBirthDate}</td>
+                <td>
+                  <div className="flex items-center justify-center gap-2">
                     <button
                       onClick={viewVaccinationCard}
-                      className="hover:bg-dark-cyan rounded-lg cursor-pointer"
+                      className="rounded-lg border border-border p-1.5 icon-sm text-dark-cyan hover:bg-secondary"
+                      type="button"
                     >
-                      <IoEyeOutline className="text-2xl mx-2" />
+                      <FiEye />
                     </button>
                     <button
                       onClick={editVaccinationCard}
-                      className="hover:bg-accent rounded-lg cursor-pointer"
+                      className="rounded-lg border border-border p-1.5 icon-sm text-primary hover:bg-accent-light"
+                      type="button"
                     >
-                      <CiEdit className="text-2xl mx-2" />
+                      <FiEdit2 />
                     </button>
-                  </td>
-                </tr>
-              ) : (
-                <tr>
-                  <td colSpan="4" className="text-center text-gray-600">
-                    No hay datos disponibles
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+                  </div>
+                </td>
+              </tr>
+            ) : (
+              <tr>
+                <td colSpan="4" className="text-center typo-caption">
+                  No hay datos disponibles
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
-      {isModalOpen && (
-        <ViewVaccinationCardModal isOpen={true} onClose={closeModal} />
-      )}
-      {isModalEditOpen && (
-        <EditVaccinationCardModal isOpen={true} onClose={closeModalEdit} />
-      )}
-    </>
+    </div>
   );
 }

@@ -1,138 +1,118 @@
 import React, { useEffect } from "react";
-import { BsFillCalendarDateFill, BsFillFilePersonFill } from "react-icons/bs";
-import { FaLocationArrow, FaPhoneAlt } from "react-icons/fa";
-import { GrMapLocation } from "react-icons/gr";
-import { PiGenderIntersexBold } from "react-icons/pi";
-import doctorCardChildren from "../../assets/images/doctorCardChildren.webp";
-import doctorCardParent from "../../assets/images/doctorCardParent.webp";
-import { AiFillHeart } from "react-icons/ai";
-import { MdOutlineEmail } from "react-icons/md";
+import { HiOutlineCalendarDays, HiOutlineEnvelope, HiOutlineHeart, HiOutlineMapPin, HiOutlinePhone, HiOutlineUserCircle, HiOutlineUsers } from "react-icons/hi2";
 import UseCardsInfoVaccinationCard from "../../hooks/cardsInfoVaccinationCard/UseCardsInfoVaccinationCard";
 import useChildrenAuthStore from "../../store/authChildren/useChildrenAuthStore";
 
 export default function CardsInfoVaccinationCard() {
   const { cardsData } = UseCardsInfoVaccinationCard();
   const { setChildrenAuthStore } = useChildrenAuthStore();
+  const info = cardsData[0];
 
   useEffect(() => {
     if (cardsData.length > 0) {
-      const { chilId, parentEmail, childDocument } = cardsData[0]; // Desestructurar el objeto
-  
+      const { chilId, parentEmail, childDocument } = cardsData[0];
+
       setChildrenAuthStore({
-        idChildren: chilId,          // Setea el ID del niño
-        emailParent: parentEmail,    // Setea el email del padre
-        persDocument: childDocument, // Setea el documento del niño
+        idChildren: chilId,
+        emailParent: parentEmail,
+        persDocument: childDocument,
       });
     }
   }, [cardsData]);
-  
+
+  if (!info) {
+    return (
+      <div className="grid w-full gap-4 lg:grid-cols-2">
+        <div className="section-card h-[240px] animate-pulse bg-secondary/40" />
+        <div className="section-card h-[240px] animate-pulse bg-secondary/40" />
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div className="lg:flex w-auto space-x-6 text-dark-green">
-        <div className="w-full lg:w-[50%] flex border border-accent p-4 rounded-3xl mt-3">
-          {cardsData.length > 0 ? (
-            <>
-              <div className="w-full flex flex-col space-y-3">
-                <div className="flex items-center space-x-2 font-bold">
-                  <BsFillFilePersonFill className="text-2xl md:text-3xl" />
-                  <div>Nombre:</div>
-                  <div>
-                    {cardsData[0].childNames} {cardsData[0].childLastNames}
-                  </div>
-                </div>
-                <div className="flex items-center space-x-2 font-bold">
-                  <BsFillCalendarDateFill className="text-2xl md:text-2xl" />
-                  <div>Fecha de nacimiento:</div>
-                  <div>{cardsData[0].parentBirthDate}</div>
-                </div>
-                <div className="flex items-center space-x-2 font-bold">
-                  <PiGenderIntersexBold className="text-2xl md:text-2xl" />
-                  <div>Sexo:</div>
-                  <div>{cardsData[0].childSex}</div>
-                </div>
-                <div className="flex items-center space-x-2 font-bold">
-                  <FaLocationArrow className="text-2xl md:text-3xl" />
-                  <div>Municipio:</div>
-                  <div>{cardsData[0].childCity}</div>
-                </div>
-                <div className="flex items-center space-x-2 font-bold">
-                  <GrMapLocation className="text-2xl md:text-3xl" />
-                  <div>Departamento:</div>
-                  <div>{cardsData[0].childDepartment}</div>
-                </div>
-              </div>
+    <div className="grid w-full gap-4 lg:grid-cols-2">
+      <article className="section-card p-4 sm:p-4">
+        <header className="mb-3 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <HiOutlineUserCircle className="icon-md text-dark-cyan" />
+            <h3 className="typo-section-title">Paciente</h3>
+          </div>
+          <span className="rounded-full border border-dark-cyan/25 bg-dark-cyan/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
+            Perfil clinico
+          </span>
+        </header>
 
-              <div className="w-90 relative hidden md:inline-flex">
-                <img
-                  className="absolute right-0 -bottom-4"
-                  src={doctorCardChildren}
-                  alt=""
-                />
-              </div>
-            </>
-          ) : (
-            <p className="text-center font-bold text-gray-600">
-              Cargando datos...
-            </p>
-          )}
+        <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+          <InfoCard
+            label="Nombre"
+            value={`${info.childNames} ${info.childLastNames}`}
+            icon={<HiOutlineUsers />}
+            span="full"
+          />
+          <InfoCard label="Nacimiento" value={info.parentBirthDate} icon={<HiOutlineCalendarDays />} />
+          <InfoCard label="Sexo" value={info.childSex} icon={<HiOutlineHeart />} compact />
+          <InfoCard label="Municipio" value={info.childCity} icon={<HiOutlineMapPin />} />
+          <InfoCard label="Departamento" value={info.childDepartment} icon={<HiOutlineMapPin />} />
         </div>
+      </article>
 
-        <div className="w-full lg:w-[50%] flex border border-accent p-4 rounded-3xl mt-3">
-          {cardsData.length > 0 ? (
-            <>
-              <div className="w-full flex flex-col space-y-3">
-                <div className="flex items-center space-x-2 font-bold">
-                  <AiFillHeart className="text-2xl md:text-3xl" />
-                  <div>Parentesco:</div>
-                  <div>{cardsData[0].parentRole}</div>
-                </div>
-                <div className="flex items-center space-x-2 font-bold">
-                  <BsFillFilePersonFill className="text-2xl md:text-3xl" />
-                  <div>Nombre:</div>
-                  <div>
-                    {cardsData[0].parentNames} {cardsData[0].parentLastNames}
-                  </div>
-                </div>
-                <div className="flex items-center space-x-2 font-bold">
-                  <GrMapLocation className="text-2xl md:text-3xl" />
-                  <div>Direccion:</div>
-                  <div>{cardsData[0].parentAddress}</div>
-                </div>
-                <div className="flex items-center space-x-2 font-bold">
-                  <PiGenderIntersexBold className="text-2xl md:text-2xl" />
-                  <div>Sexo:</div>
-                  <div>{cardsData[0].parentSex}</div>
-                </div>
-                <div className="flex items-center space-x-2 font-bold">
-                  <FaPhoneAlt className="text-2xl md:text-3xl" />
-                  <div>Teléfono:</div>
-                  <div>{cardsData[0].parentPhone}</div>
-                </div>
-                <div className="flex items-center space-x-2 font-bold">
-                  <MdOutlineEmail className="text-2xl md:text-3xl" />
-                  <div>Correo:</div>
-                  <div className="max-w-[200px] overflow-x-auto">
-                    {cardsData[0].parentEmail}
-                  </div>
-                </div>
-              </div>
+      <article className="section-card p-4 sm:p-4">
+        <header className="mb-3 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <HiOutlineHeart className="icon-md text-dark-cyan" />
+            <h3 className="typo-section-title">Acudiente</h3>
+          </div>
+          <span className="rounded-full border border-dark-cyan/25 bg-dark-cyan/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
+            Contacto principal
+          </span>
+        </header>
 
-              <div className="w-90 relative hidden md:inline-flex">
-                <img
-                  className="absolute right-0 -bottom-4"
-                  src={doctorCardParent}
-                  alt=""
-                />
-              </div>
-            </>
-          ) : (
-            <p className="text-center font-bold text-gray-600">
-              Cargando datos...
-            </p>
-          )}
+        <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+          <InfoCard label="Parentesco" value={info.parentRole} icon={<HiOutlineHeart />} />
+          <InfoCard label="Sexo" value={info.parentSex} icon={<HiOutlineHeart />} compact />
+          <InfoCard
+            label="Nombre"
+            value={`${info.parentNames} ${info.parentLastNames}`}
+            icon={<HiOutlineUsers />}
+            span="full"
+          />
+          <InfoCard label="Telefono" value={info.parentPhone} icon={<HiOutlinePhone />} />
+          <InfoCard
+            label="Correo"
+            value={info.parentEmail}
+            icon={<HiOutlineEnvelope />}
+            span="full"
+          />
+          <InfoCard
+            label="Direccion"
+            value={info.parentAddress}
+            icon={<HiOutlineMapPin />}
+            span="full"
+          />
         </div>
-      </div>
-    </>
+      </article>
+    </div>
+  );
+}
+
+function InfoCard({ icon, label, value, span = "normal", compact = false }) {
+  const textValue = value || "-";
+  const isCompactValue = compact || String(textValue).trim().length <= 2;
+  const spanClass = span === "full" ? "sm:col-span-2" : "";
+
+  return (
+    <div className={`flex min-h-[34px] items-center gap-1.5 ${spanClass}`}>
+      <div className="shrink-0 icon-sm text-dark-cyan">{icon}</div>
+      <p className="typo-label leading-tight">{label}:</p>
+      <p
+        className={
+          isCompactValue
+            ? "typo-body font-semibold text-primary"
+            : "min-w-0 flex-1 typo-body break-words leading-tight text-primary"
+        }
+      >
+        {textValue}
+      </p>
+    </div>
   );
 }

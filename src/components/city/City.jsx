@@ -3,16 +3,15 @@ import UseCity from "../../hooks/city/UseCity";
 import useDepartmentStore from "../../store/Department/useDepartmentStore";
 import { showToast } from "../../components/notifyToast/NotifyToast";
 
-
-export default function City({name, id, value, onChange}) {
+export default function City({ name, id, value, onChange }) {
   const { cityData, fetchCityData } = UseCity();
   const depaId = useDepartmentStore((state) => state.depaId);
 
   return (
     <div className="w-full">
-      <div className="text-gray">Municipio</div>
+      <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-gray">Municipio</label>
       <select
-        className="w-full border border-background-card p-3 rounded-lg"
+        className="form-select text-sm"
         name={name}
         id={id}
         value={value}
@@ -25,7 +24,7 @@ export default function City({name, id, value, onChange}) {
           }
         }}
       >
-        <option hidden selected>
+        <option hidden value="">
           Selecciona
         </option>
         {cityData.map((cityList, index) => (
@@ -33,7 +32,7 @@ export default function City({name, id, value, onChange}) {
             {cityList.cityName}
           </option>
         ))}
-      </select> 
+      </select>
     </div>
   );
 }

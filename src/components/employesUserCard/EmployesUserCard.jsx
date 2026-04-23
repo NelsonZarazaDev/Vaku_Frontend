@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CiUser } from "react-icons/ci";
+import { HiOutlineUserCircle } from "react-icons/hi2";
 import UseEmployees from "../../hooks/employees/UseEmployees";
 import EmployeeEditModal from "../modals/EmployeeEditModal";
 import EmployeeViewModal from "../modals/EmployeeViewModal";
@@ -7,7 +7,7 @@ import EmployeeViewModal from "../modals/EmployeeViewModal";
 import useEmployeeViewEditStore from "../../store/employeeView/useEmployeeViewEditStore";
 
 export default function EmployesUserCard() {
-  const { employeeAllData } = UseEmployees();
+  const { employeeAllData, refreshEmployees } = UseEmployees();
   const { emailEmployee, setEmailEmployee } = useEmployeeViewEditStore();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,7 +29,11 @@ export default function EmployesUserCard() {
   return (
     <>
       {isModalOpen && (
-        <EmployeeEditModal isOpen={isModalOpen} onClose={closeModalEdit} />
+        <EmployeeEditModal
+          isOpen={isModalOpen}
+          onClose={closeModalEdit}
+          onSaved={refreshEmployees}
+        />
       )}
 
       {isModalOpenView && (
@@ -38,22 +42,22 @@ export default function EmployesUserCard() {
       {employeeAllData.map((employeeData, index) => (
         <div
           key={index}
-          className="box-shadow-card flex flex-col p-4 w-full rounded-2xl"
+          className="section-card flex w-full flex-col p-4"
         >
           <div className="flex flex-col">
             <div className="flex font-bold">
-              <CiUser className="text-3xl" />
+              <HiOutlineUserCircle className="icon-md text-dark-cyan" />
               <div>
-                <p className="">
+                <p className="typo-section-title">
                   {employeeData.persNames} {employeeData.persLastNames}
                 </p>
-                <p className="text-gray mt-2">{employeeData.persRole}</p>
+                <p className="mt-1 typo-caption">{employeeData.persRole}</p>
               </div>
             </div>
           </div>
 
-          <div className="flex justify-center items-center font-bold h-18">
-            <label htmlFor="">
+          <div className="flex h-14 items-center justify-center font-semibold typo-body">
+            <label>
               {employeeData.emplState ? "Activo" : "Inactivo"}
             </label>
           </div>
@@ -61,14 +65,14 @@ export default function EmployesUserCard() {
           <div className="flex justify-center items-center">
             <button
               onClick={() => openModalEdit(employeeData.persEmail)}
-              className="bg-accent-light w-[40%] py-1.5 rounded-l-full border cursor-pointer"
+              className="w-[42%] rounded-l-full border border-border bg-accent-light py-1.5 text-xs font-semibold cursor-pointer"
             >
               Editar
             </button>
 
             <button
               onClick={() => openModalView(employeeData.persEmail)}
-              className="bg-surface w-[40%] py-1.5 rounded-r-full border cursor-pointer"
+              className="w-[42%] rounded-r-full border border-border bg-surface py-1.5 text-xs font-semibold cursor-pointer"
             >
               Ver
             </button>

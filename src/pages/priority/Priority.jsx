@@ -1,36 +1,38 @@
 import React from "react";
 import ButtonEmailPriority from "../../components/buttonEmailPriority/ButtonEmailPriority";
-import { CiCircleAlert } from "react-icons/ci";
+import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import UsePriority from "../../hooks/priority/UsePriority";
 
 export default function Priority() {
   const { priorityData } = UsePriority();
-  console.log(priorityData)
 
   return (
-    <>
-      <div className="px-5 md:px-20 w-full h-36 flex justify-between items-center">
-        <p className="font-bold text-2xl text-dark-cyan">
-          Prioridad de niños a vacunar
-        </p>
+    <section className="space-y-4">
+      <header className="page-header">
+        <div>
+          <h1 className="page-title">Prioridad de vacunacion</h1>
+          <p className="page-subtitle">Lista de pacientes con cita pendiente o vencida.</p>
+        </div>
         <ButtonEmailPriority />
-      </div>
+      </header>
 
-      <div className="px-5 md:px-20 w-full">
+      <div className="space-y-3">
         {priorityData.map((child, index) => (
-          <div className="p-6 flex justify-between items-center box-shadow-card rounded-2xl font-bold mb-6">
-            <div className="flex justify-center items-center">
-              <CiCircleAlert className="text-4xl mr-2 text-error" />
-              <div className="text-lg">
+          <div key={`${child.childDocument}-${index}`} className="section-card flex flex-wrap items-center justify-between gap-3 p-4">
+            <div className="flex items-center gap-2">
+              <HiOutlineExclamationTriangle className="icon-md text-error" />
+              <div className="typo-body">
                 <div>{child.childNames} {child.childLastNames}</div>
-                <div>{child.childDocument}</div>
+                <div className="typo-caption">Documento: {child.childDocument}</div>
               </div>
             </div>
 
-            <div className="text-lg">fecha: {child.vaapNextAppointmentDate}</div>
+            <div className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-dark-green">
+              Fecha: {child.vaapNextAppointmentDate}
+            </div>
           </div>
         ))}
       </div>
-    </>
+    </section>
   );
 }
