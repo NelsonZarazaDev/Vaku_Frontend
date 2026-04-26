@@ -9,7 +9,8 @@ import { isHeadNurseRole } from "../../utils/roles";
 export default function Audit() {
   const role = useEmployeeAuthStore((state) => state.employeeInfo.persRole);
   const canViewAudit = isHeadNurseRole(role);
-  const { logs, page, totalPages, totalElements, loading, fetchAuditLogs } = UseAuditLogs(50);
+  const { logs, page, size, setSize, totalPages, totalElements, loading, fetchAuditLogs } =
+    UseAuditLogs(10);
 
   if (!canViewAudit) {
     return <Navigate to={`${ROUTE_PATHS.HOME}/${ROUTE_PATHS.PRIORITY}`} replace />;
@@ -25,9 +26,27 @@ export default function Audit() {
             <p className="page-subtitle">Registro completo de acciones. Total: {totalElements}</p>
           </div>
         </div>
-        <button className="btn-secondary typo-body" onClick={() => fetchAuditLogs(page)} type="button">
-          Actualizar
-        </button>
+        <div className="flex items-center gap-2">
+          <label className="typo-caption" htmlFor="audit-page-size">
+            Registros
+          </label>
+          <select
+            id="audit-page-size"
+            className="form-select !w-[92px] !py-2"
+            value={size}
+            onChange={(e) => {
+              setSize(Number(e.target.value));
+            }}
+          >
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={50}>50</option>
+            <option value={100}>100</option>
+          </select>
+          <button className="btn-secondary typo-body" onClick={() => fetchAuditLogs(page)} type="button">
+            Actualizar
+          </button>
+        </div>
       </header>
 
       <div className="data-table-wrap">
@@ -75,29 +94,27 @@ export default function Audit() {
         </table>
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex items-center justify-end gap-2">
-          <button
-            type="button"
-            className="btn-secondary typo-caption"
-            disabled={page <= 0 || loading}
-            onClick={() => fetchAuditLogs(page - 1)}
-          >
-            Anterior
-          </button>
-          <span className="typo-caption">
-            Pagina {page + 1} de {totalPages}
-          </span>
-          <button
-            type="button"
-            className="btn-secondary typo-caption"
-            disabled={page >= totalPages - 1 || loading}
-            onClick={() => fetchAuditLogs(page + 1)}
-          >
-            Siguiente
-          </button>
-        </div>
-      )}
+      <div className="flex items-center justify-end gap-2">
+        <button
+          type="button"
+          className="btn-secondary typo-caption"
+          disabled={page <= 0 || loading}
+          onClick={() => fetchAuditLogs(page - 1)}
+        >
+          Anterior
+        </button>
+        <span className="typo-caption">
+          Pagina {Math.max(page + 1, 1)} de {Math.max(totalPages, 1)}
+        </span>
+        <button
+          type="button"
+          className="btn-secondary typo-caption"
+          disabled={page >= Math.max(totalPages, 1) - 1 || loading}
+          onClick={() => fetchAuditLogs(page + 1)}
+        >
+          Siguiente
+        </button>
+      </div>
     </section>
   );
 }

@@ -49,7 +49,7 @@ export default function Navbar() {
                     to={to}
                     className={({ isActive }) =>
                       `rounded-full px-4 py-2 typo-caption font-semibold transition-all ${
-                        isActive ? "bg-button text-surface shadow" : "text-text hover:bg-surface"
+                        isActive ? "bg-button !text-surface shadow" : "text-text hover:bg-surface"
                       }`
                     }
                   >

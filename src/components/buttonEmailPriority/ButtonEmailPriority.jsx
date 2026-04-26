@@ -1,11 +1,8 @@
 import React from "react";
-import UsePriority from "../../hooks/priority/UsePriority";
 
-export default function ButtonEmailPriority() {
-  const { notifyEmail } = UsePriority();
-
+export default function ButtonEmailPriority({ onNotify }) {
   return (
-    <button onClick={notifyEmail} className="btn-warning" type="button">
+    <button onClick={onNotify} className="btn-warning" type="button">
       Notificar
     </button>
   );

@@ -11,9 +11,7 @@ export default function Employees() {
         </div>
       </header>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        <EmployesUserCard />
-      </div>
+      <EmployesUserCard />
     </section>
   );
 }
