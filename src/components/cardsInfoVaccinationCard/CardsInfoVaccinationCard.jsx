@@ -4,7 +4,7 @@ import UseCardsInfoVaccinationCard from "../../hooks/cardsInfoVaccinationCard/Us
 import useChildrenAuthStore from "../../store/authChildren/useChildrenAuthStore";
 
 export default function CardsInfoVaccinationCard() {
-  const { cardsData } = UseCardsInfoVaccinationCard();
+  const { cardsData, isLoading, hasDocument } = UseCardsInfoVaccinationCard();
   const { setChildrenAuthStore } = useChildrenAuthStore();
   const info = cardsData[0];
 
@@ -18,13 +18,33 @@ export default function CardsInfoVaccinationCard() {
         persDocument: childDocument,
       });
     }
-  }, [cardsData]);
+  }, [cardsData, setChildrenAuthStore]);
 
-  if (!info) {
+  if (!hasDocument) {
+    return (
+      <div className="section-card p-5 text-center">
+        <p className="typo-section-title text-dark-cyan">No hay paciente seleccionado</p>
+        <p className="mt-1 typo-body text-gray">
+          Inicia sesión como paciente o abre el carnet desde la búsqueda de niños.
+        </p>
+      </div>
+    );
+  }
+
+  if (isLoading) {
     return (
       <div className="grid w-full gap-4 lg:grid-cols-2">
         <div className="section-card h-[240px] animate-pulse bg-secondary/40" />
         <div className="section-card h-[240px] animate-pulse bg-secondary/40" />
+      </div>
+    );
+  }
+
+  if (!info) {
+    return (
+      <div className="section-card p-5 text-center">
+        <p className="typo-section-title text-dark-cyan">No se encontraron datos del paciente</p>
+        <p className="mt-1 typo-body text-gray">Verifica el documento e inténtalo nuevamente.</p>
       </div>
     );
   }
@@ -38,7 +58,7 @@ export default function CardsInfoVaccinationCard() {
             <h3 className="typo-section-title">Paciente</h3>
           </div>
           <span className="rounded-full border border-dark-cyan/25 bg-dark-cyan/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
-            Perfil clinico
+            Perfil clínico
           </span>
         </header>
 
@@ -76,7 +96,7 @@ export default function CardsInfoVaccinationCard() {
             icon={<HiOutlineUsers />}
             span="full"
           />
-          <InfoCard label="Telefono" value={info.parentPhone} icon={<HiOutlinePhone />} />
+          <InfoCard label="Teléfono" value={info.parentPhone} icon={<HiOutlinePhone />} />
           <InfoCard
             label="Correo"
             value={info.parentEmail}
@@ -84,7 +104,7 @@ export default function CardsInfoVaccinationCard() {
             span="full"
           />
           <InfoCard
-            label="Direccion"
+            label="Dirección"
             value={info.parentAddress}
             icon={<HiOutlineMapPin />}
             span="full"

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAuthHeader } from "../../constants/authHeader";
 import { API } from "../../constants/api";
 import axios from "axios";
+import { showToast } from "../../components/notifyToast/NotifyToast";
 
 export default function UseDepartment() {
   const headers = getAuthHeader();
@@ -17,7 +18,7 @@ export default function UseDepartment() {
         if (axios.isAxiosError(error)) {
           if (error.response) {
             showToast(
-              "Ah ocurrido un error inesperado",
+              "Ha ocurrido un error inesperado",
               "error"
             );
           }

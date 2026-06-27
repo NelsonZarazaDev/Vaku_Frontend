@@ -4,7 +4,7 @@ import useEmployeeAuthStore from "../../store/authEmployee/useEmployeeAuthStore"
 import { API } from "../../constants/api";
 import axios from "axios";
 import { getAuthHeader } from "../../constants/authHeader";
-import { showApiError, showToast } from "../../components/notifyToast/NotifyToast";
+import { showApiError } from "../../components/notifyToast/NotifyToast";
 
 export default function UseSendVaccineApplied({ onSuccess } = {}) {
   const headers = getAuthHeader();
@@ -15,6 +15,8 @@ export default function UseSendVaccineApplied({ onSuccess } = {}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [registerVaccine, setRegisterVaccine] = useState({
+    vaapApplied: true,
+    vaapDateApplication: getTodayDate(),
     vaapNextAppointmentDate: "",
     vaccines: {
       vaccId: idVaccine,
@@ -38,14 +40,50 @@ export default function UseSendVaccineApplied({ onSuccess } = {}) {
 
     try {
       const url = API.APIREGISTERVACCINE;
+      const vaccineToRegister = {
+        ...registerVaccine,
+        vaapApplied: true,
+        vaapDateApplication: registerVaccine.vaapDateApplication || getTodayDate(),
+        vaccines: {
+          ...registerVaccine.vaccines,
+          vaccId: idVaccine,
+        },
+        employees: {
+          ...registerVaccine.employees,
+          emplId: idEmpl,
+        },
+        childrens: {
+          ...registerVaccine.childrens,
+          chilId: idChildren,
+        },
+      };
       const payload = {
-        vaccinesApplied: registerVaccine,
+        vaccinesApplied: vaccineToRegister,
         emailFather: emailParent,
       };
-      await axios.post(url, payload, { headers });
-      showToast("Vacuna registrada exitosomente", "success");
+      const response = await axios.post(url, payload, { headers });
+      const savedVaccineApplied =
+        response.data && typeof response.data === "object"
+          ? {
+              ...vaccineToRegister,
+              ...response.data,
+              vaapApplied: response.data.vaapApplied ?? true,
+              vaapDateApplication:
+                response.data.vaapDateApplication ||
+                response.data.vaap_date_application ||
+                vaccineToRegister.vaapDateApplication,
+              vaapNextAppointmentDate:
+                response.data.vaapNextAppointmentDate ||
+                response.data.vaap_next_appointment_date ||
+                vaccineToRegister.vaapNextAppointmentDate,
+              vaccines: response.data.vaccines || vaccineToRegister.vaccines,
+              employees: response.data.employees || vaccineToRegister.employees,
+              childrens: response.data.childrens || vaccineToRegister.childrens,
+            }
+          : vaccineToRegister;
+
       if (typeof onSuccess === "function") {
-        await onSuccess();
+        await onSuccess(savedVaccineApplied);
       }
     } catch (error) {
       showApiError(error, "Error al registrar la vacuna");
@@ -58,4 +96,8 @@ export default function UseSendVaccineApplied({ onSuccess } = {}) {
     onInputChange,
     onSubmit,
   };
+}
+
+function getTodayDate() {
+  return new Date().toISOString().slice(0, 10);
 }

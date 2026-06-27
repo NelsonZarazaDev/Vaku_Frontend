@@ -16,6 +16,7 @@ export const API = {
   APIINFOCHILDREN: `${API_BASE_URL}/vaccinesCard/info`,
   APIDOWNLOADCARNETPDF: `${API_BASE_URL}/auth/generar`,
   APIALLVACCINES: `${API_BASE_URL}/vaccines`,
+  APIVACCINESBYCHILD: `${API_BASE_URL}/vaccines/child`,
   APIVACCINECARD: `${API_BASE_URL}/vaccinesCard`,
   APIREGISTERVACCINE:`${API_BASE_URL}/vaccineApplied`,
   APIAUDITLOGS: `${API_BASE_URL}/audit/logs`,

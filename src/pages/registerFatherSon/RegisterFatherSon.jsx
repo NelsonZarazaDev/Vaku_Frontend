@@ -11,8 +11,8 @@ export default function RegisterFatherSon() {
     <section className="space-y-4">
       <header className="page-header">
         <div>
-          <h1 className="page-title">Registro de nino y acudiente</h1>
-          <p className="page-subtitle">Datos clinicos y de contacto en un solo formulario.</p>
+          <h1 className="page-title">Registro de niño y acudiente</h1>
+          <p className="page-subtitle">Datos clínicos y de contacto en un solo formulario.</p>
         </div>
       </header>
 
@@ -20,7 +20,7 @@ export default function RegisterFatherSon() {
         <form onSubmit={onSubmit} className="space-y-6">
           <div className="grid gap-6 lg:grid-cols-2">
             <div className="space-y-3">
-              <h2 className="text-base font-semibold text-dark-green">Datos del nino</h2>
+              <h2 className="text-base font-semibold text-dark-green">Datos del niño</h2>
 
               <div className="grid gap-3 sm:grid-cols-2">
                 <input className="form-input text-sm" type="text" name="1-persNames" id="1-persNames" value={fatherSonData[1].persNames} onChange={onInputChange} placeholder="Nombres" />
@@ -58,7 +58,7 @@ export default function RegisterFatherSon() {
 
               <div className="grid gap-3 sm:grid-cols-2">
                 <input className="form-input text-sm" type="text" name="0-persDocument" id="0-persDocument" value={fatherSonData[0].persDocument} onChange={onInputChange} placeholder="Documento" />
-                <input className="form-input text-sm" type="text" name="0-persPhone" id="0-persPhone" value={fatherSonData[0].persPhone} onChange={onInputChange} placeholder="Telefono" />
+                <input className="form-input text-sm" type="text" name="0-persPhone" id="0-persPhone" value={fatherSonData[0].persPhone} onChange={onInputChange} placeholder="Teléfono" />
               </div>
 
               <input className="form-input text-sm" type="email" name="0-persEmail" id="0-persEmail" value={fatherSonData[0].persEmail} onChange={onInputChange} placeholder="Correo" />

@@ -3,6 +3,7 @@ import { getAuthHeader } from "../../constants/authHeader";
 import { API } from "../../constants/api";
 import axios from "axios";
 import useDepartmentStore from "../../store/Department/useDepartmentStore";
+import { showToast } from "../../components/notifyToast/NotifyToast";
 
 export default function UseCity() {
   const headers = getAuthHeader();
@@ -15,10 +16,8 @@ export default function UseCity() {
       const result = await axios.get(url, { headers });
       setCityData(result.data);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          showToast("Ah ocurrido un error inesperado", "error");
-        }
+      if (axios.isAxiosError(error) && error.response) {
+        showToast("Ha ocurrido un error inesperado", "error");
       }
     }
   };

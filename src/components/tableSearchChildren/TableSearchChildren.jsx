@@ -8,25 +8,14 @@ export default function TableSearchChildren({ data }) {
   const { setChildrenAuthStore } = useChildrenAuthStore();
   const navigate = useNavigate();
 
-  const viewVaccinationCard = () => {
+  const goToVaccinationCard = (mode) => {
     setChildrenAuthStore({
       persDocument: data.childDocument,
       idChildren: data.chilId,
       emailParent: data.parentEmail,
     });
     navigate(`${ROUTE_PATHS.HOME}/${ROUTE_PATHS.VACCINATIONCARD}`, {
-      state: { mode: "view" },
-    });
-  };
-
-  const editVaccinationCard = () => {
-    setChildrenAuthStore({
-      persDocument: data.childDocument,
-      idChildren: data.chilId,
-      emailParent: data.parentEmail,
-    });
-    navigate(`${ROUTE_PATHS.HOME}/${ROUTE_PATHS.VACCINATIONCARD}`, {
-      state: { mode: "edit" },
+      state: { mode },
     });
   };
 
@@ -53,16 +42,18 @@ export default function TableSearchChildren({ data }) {
                 <td>
                   <div className="flex items-center justify-center gap-2">
                     <button
-                      onClick={viewVaccinationCard}
+                      onClick={() => goToVaccinationCard("view")}
                       className="rounded-lg border border-border p-1.5 icon-sm text-dark-cyan hover:bg-secondary"
                       type="button"
+                      title="Ver esquema"
                     >
                       <FiEye />
                     </button>
                     <button
-                      onClick={editVaccinationCard}
-                      className="rounded-lg border border-border p-1.5 icon-sm text-primary hover:bg-accent-light"
+                      onClick={() => goToVaccinationCard("edit")}
+                      className="rounded-lg border border-border p-1.5 icon-sm text-dark-cyan hover:bg-secondary"
                       type="button"
+                      title="Editar esquema"
                     >
                       <FiEdit2 />
                     </button>

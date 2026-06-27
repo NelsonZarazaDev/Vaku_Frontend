@@ -61,7 +61,7 @@ export default function UseRegisterEmployee() {
 
       const url = API.APIREGISTERFATHERSONANDEMPLOYEE;
       await axios.post(url, employeeData, { headers });
-      showToast("Datos registrados con exito", "success");
+      showToast("Datos registrados con éxito", "success");
       setEmployeeData(initialData);
     } catch (error) {
       showApiError(error, "Error inesperado en el servidor");

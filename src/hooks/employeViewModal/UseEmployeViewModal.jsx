@@ -18,7 +18,7 @@ export default function UseEmployeViewModal() {
       const result = await axios.get(url, { headers });
       setEmployeeData(result.data);
     } catch (error) {
-      showToast("Error al obtener la informacion", error);
+      showToast("Error al obtener la información", error);
     }
   };
 

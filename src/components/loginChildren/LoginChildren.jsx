@@ -11,21 +11,21 @@ export default function LoginChildren() {
     <div className="min-h-screen bg-transparent px-4 py-8 md:px-8">
       <div className="mx-auto grid min-h-[86vh] w-[90vw] max-w-[1600px] grid-cols-1 overflow-hidden rounded-3xl border border-border bg-white/92 shadow-2xl lg:grid-cols-[1.05fr_0.95fr]">
         <div className="relative hidden items-end justify-center bg-secondary/65 p-8 lg:flex">
-          <img className="h-[70%] object-contain" src={doctorChildrenLongin} alt="Atencion pediatrica" />
+          <img className="h-[70%] object-contain" src={doctorChildrenLongin} alt="Atención pediátrica" />
         </div>
 
         <div className="flex items-center justify-center p-6 sm:p-10">
           <div className="w-full max-w-md">
             <p className="font-LeckerliOne typo-logo text-text">vaku</p>
             <div className="mt-6">
-              <h1 className="typo-modal-title">Iniciar sesion</h1>
+              <h1 className="typo-modal-title">Iniciar sesión</h1>
               <p className="mt-1 typo-caption">Acceso para paciente</p>
             </div>
 
             <form className="mt-7 space-y-4" onSubmit={onSubmit}>
               <input
                 className="form-input text-sm"
-                placeholder="Numero de documento"
+                placeholder="Número de documento"
                 type="text"
                 name="persDocument"
                 id="persDocument"

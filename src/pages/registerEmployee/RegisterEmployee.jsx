@@ -12,7 +12,7 @@ export default function RegisterEmployee() {
       <header className="page-header">
         <div>
           <h1 className="page-title">Registro de empleados</h1>
-          <p className="page-subtitle">Completa la informacion del usuario del sistema.</p>
+          <p className="page-subtitle">Completa la información del usuario del sistema.</p>
         </div>
       </header>
 
@@ -25,15 +25,15 @@ export default function RegisterEmployee() {
 
           <div className="grid gap-3 md:grid-cols-3">
             <input className="form-input text-sm" type="text" name="persDocument" id="persDocument" value={employeeData[0].persDocument} onChange={onInputChange} placeholder="Documento" />
-            <input className="form-input text-sm" type="text" name="persPhone" id="persPhone" value={employeeData[0].persPhone} onChange={onInputChange} placeholder="Telefono" />
+            <input className="form-input text-sm" type="text" name="persPhone" id="persPhone" value={employeeData[0].persPhone} onChange={onInputChange} placeholder="Teléfono" />
             <input className="form-input text-sm" type="email" name="persEmail" id="persEmail" value={employeeData[0].persEmail} onChange={onInputChange} placeholder="Correo" />
           </div>
 
-          <input className="form-input text-sm" type="password" name="persPassword" id="persPassword" value={employeeData[0].persPassword} onChange={onInputChange} placeholder="Contrasena" />
+          <input className="form-input text-sm" type="password" name="persPassword" id="persPassword" value={employeeData[0].persPassword} onChange={onInputChange} placeholder="Contraseña" />
 
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray">Direccion</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-gray">Dirección</p>
               <div className="grid gap-3 sm:grid-cols-2">
                 <Department />
                 <City name={`cityId`} id={`cityId`} value={employeeData[0].citys.cityId} onChange={onInputChange} />

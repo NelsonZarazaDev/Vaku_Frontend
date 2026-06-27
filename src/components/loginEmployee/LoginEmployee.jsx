@@ -18,7 +18,7 @@ export default function LoginEmployee() {
           <div className="w-full max-w-md">
             <p className="font-LeckerliOne typo-logo text-text">vaku</p>
             <div className="mt-6">
-              <h1 className="typo-modal-title">Iniciar sesion</h1>
+              <h1 className="typo-modal-title">Iniciar sesión</h1>
               <p className="mt-1 typo-caption">Acceso para personal de salud</p>
             </div>
 
@@ -34,7 +34,7 @@ export default function LoginEmployee() {
               />
               <input
                 className="form-input text-sm"
-                placeholder="Contrasena"
+                placeholder="Contraseña"
                 type="password"
                 name="persPassword"
                 id="persPassword"

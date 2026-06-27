@@ -59,7 +59,7 @@ export default function UseEmployeEditModal({ empleado, onSuccess }) {
 
     try {
       await axios.put(url, dataToSend, { headers });
-      showToast("Datos actualizados con exito", "success");
+      showToast("Datos actualizados con éxito", "success");
       if (typeof onSuccess === "function") {
         await onSuccess();
       }

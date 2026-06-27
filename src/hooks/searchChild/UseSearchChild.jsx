@@ -18,13 +18,12 @@ export default function UseSearchChild({ onResult }) {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-
     try {
       const url = `${API.APIINFOCHILDREN}/${searchData.search}`;
       const result = await axios.get(url, { headers });
       onResult(result.data[0]);
-      showToast("Usuario encontrado con exito", "success");
-    } catch (error) {
+      showToast("Usuario encontrado con éxito", "success");
+    } catch {
       showToast("Usuario no encontrado", "error");
     }
   };

@@ -53,10 +53,7 @@ export default function UseRegisterFatherSon() {
     e.preventDefault();
 
     try {
-      const documentsToValidate = [
-        fatherSonData[0]?.persDocument?.trim(),
-        fatherSonData[1]?.persDocument?.trim(),
-      ].filter(Boolean);
+      const documentsToValidate = [fatherSonData[0]?.persDocument?.trim()].filter(Boolean);
 
       for (const document of documentsToValidate) {
         const existingPerson = await findPersonByDocument(document, headers);
@@ -71,10 +68,10 @@ export default function UseRegisterFatherSon() {
 
       const url = API.APIREGISTERFATHERSONANDEMPLOYEE;
       await axios.post(url, fatherSonData, { headers });
-      showToast("Datos registrados con exito", "success");
+      showToast("Datos registrados con éxito", "success");
       setFatherSonData(initialData);
     } catch (error) {
-      showApiError(error, "Error al registrar la informacion");
+      showApiError(error, "Error al registrar la información");
     }
   };
 

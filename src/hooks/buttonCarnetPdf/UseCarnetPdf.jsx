@@ -1,6 +1,6 @@
 import { API } from "../../constants/api";
 import axios from "axios";
-import { showToast } from "../../components/notifyToast/NotifyToast";
+import { showApiError, showToast } from "../../components/notifyToast/NotifyToast";
 import UseCardsInfoVaccinationCard from "../cardsInfoVaccinationCard/UseCardsInfoVaccinationCard";
 import UseTableVaccinationCard from "../tableVaccinationCard/UseTableVaccinationCard";
 import { getAuthHeader } from "../../constants/authHeader";
@@ -25,8 +25,8 @@ export default function UseCarnetPdf() {
         data,
         {
           responseType: "blob",
-        },
-        { headers }
+          headers,
+        }
       );
 
       const file = new Blob([response.data], { type: "application/pdf" });
@@ -35,7 +35,7 @@ export default function UseCarnetPdf() {
 
       showToast("Carnet abierto en nueva pestaña", "success");
     } catch (error) {
-      showToast("Hubo un error al abrir el carnet", "error");
+      showApiError(error, "Hubo un error al abrir el carnet");
     }
   };
 

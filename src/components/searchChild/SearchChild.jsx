@@ -9,14 +9,14 @@ export default function SearchChild({ onResult }) {
     <div className="section-card p-4 sm:p-5">
       <div className="mb-3 flex items-center gap-2">
         <FiUserCheck className="icon-md text-accent" />
-        <p className="typo-section-title text-dark-cyan">Busqueda de ninos</p>
+        <p className="typo-section-title text-dark-cyan">Búsqueda de niños</p>
       </div>
 
       <form onSubmit={onSubmit}>
         <div className="flex items-center gap-2">
           <input
             className="form-input text-sm"
-            placeholder="Documento del nino"
+            placeholder="Documento del niño"
             type="text"
             id="search"
             name="search"

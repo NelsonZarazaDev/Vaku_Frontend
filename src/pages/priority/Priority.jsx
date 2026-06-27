@@ -20,7 +20,7 @@ export default function Priority() {
     <section className="space-y-4">
       <header className="page-header">
         <div>
-          <h1 className="page-title">Prioridad de vacunacion</h1>
+          <h1 className="page-title">Prioridad de vacunación</h1>
           <p className="page-subtitle">
             Lista de pacientes con cita pendiente o vencida. Total: {totalElements}
           </p>

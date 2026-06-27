@@ -1,7 +1,7 @@
 import React from 'react'
 import VaccinationCard from '../../pages/vaccinationCard/VaccinationCard'
 
-export default function ViewVaccinationCardModal({ isOpen, onClose }) {
+export default function ViewVaccinationCardModal({ onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-auto">
       <div
@@ -11,7 +11,7 @@ export default function ViewVaccinationCardModal({ isOpen, onClose }) {
   
       <div className="relative bg-white rounded-xl shadow-lg w-full mx-4  overflow-hidden">
         <div className="overflow-y-auto max-h-[80vh] p-6">
-          <VaccinationCard mostrarAction={true} />
+          <VaccinationCard />
         </div>
       </div>
     </div>

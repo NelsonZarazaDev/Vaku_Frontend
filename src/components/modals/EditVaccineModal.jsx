@@ -5,15 +5,17 @@ import BaseModal from "./BaseModal";
 
 export default function EditVaccineModal({ onClose, vaccineData, onSaved }) {
   const { registerVaccine, onInputChange, onSubmit } = UseSendVaccineApplied({
-    onSuccess: async () => {
+    onSuccess: async (savedVaccineApplied) => {
       if (typeof onSaved === "function") {
-        await onSaved();
+        await onSaved(savedVaccineApplied);
       }
       onClose();
     },
   });
   const idVaccine = useChildrenAuthStore((state) => state.idVaccine);
-  const selectedVaccine = vaccineData.find((item) => item.vaccId === idVaccine);
+  const selectedVaccine = vaccineData.find(
+    (item) => String(item.vaccId) === String(idVaccine)
+  );
 
   return (
     <BaseModal onClose={onClose} size="sm">
@@ -34,7 +36,7 @@ export default function EditVaccineModal({ onClose, vaccineData, onSaved }) {
             </div>
 
             <div>
-              <label className="mb-1 block typo-caption font-semibold uppercase tracking-wide text-gray">Fecha proxima cita</label>
+              <label className="mb-1 block typo-caption font-semibold uppercase tracking-wide text-gray">Fecha pr&oacute;xima cita</label>
               <input
                 className="form-input typo-body"
                 type="date"
@@ -52,7 +54,7 @@ export default function EditVaccineModal({ onClose, vaccineData, onSaved }) {
             </div>
           </form>
         ) : (
-          <p className="typo-body text-gray">No se encontro la vacuna seleccionada.</p>
+          <p className="typo-body text-gray">No se encontr&oacute; la vacuna seleccionada.</p>
         )}
       </div>
     </BaseModal>

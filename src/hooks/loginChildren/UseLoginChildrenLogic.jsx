@@ -29,7 +29,7 @@ export default function UseLoginChildrenLogic() {
     const document = login.persDocument.replace(/\D/g, "").trim();
     const isValidDocument = /^[0-9]{5,10}$/.test(document);
     if (!isValidDocument) {
-      showToast("El documento debe tener entre 5 y 10 digitos", "error");
+      showToast("El documento debe tener entre 5 y 10 dígitos", "error");
       return;
     }
 
@@ -53,10 +53,10 @@ export default function UseLoginChildrenLogic() {
         persDocument: document,
       });
 
-      showToast("Inicio de sesion exitoso", "success");
+      showToast("Inicio de sesión exitoso", "success");
       navigate(`${ROUTE_PATHS.HOME}/${ROUTE_PATHS.VACCINATIONCARD}`);
     } catch (error) {
-      showApiError(error, "Credenciales invalidas");
+      showApiError(error, "Credenciales inválidas");
     } finally {
       setIsSubmitting(false);
     }

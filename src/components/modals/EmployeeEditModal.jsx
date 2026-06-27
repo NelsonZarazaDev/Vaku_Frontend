@@ -41,7 +41,7 @@ export default function EmployeeEditModal({ onClose, onSaved }) {
               name="persPassword"
               value={employeEditData.persPassword}
               onChange={onInputChange}
-              placeholder="Nueva contrasena"
+              placeholder="Nueva contraseña"
             />
             <select className="form-select typo-body" name="emplState" value={String(employeEditData.emplState)} onChange={onInputChange}>
               <option value="true">Activo</option>

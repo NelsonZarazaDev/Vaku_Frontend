@@ -22,7 +22,7 @@ export default function Audit() {
         <div className="flex items-center gap-2">
           <HiOutlineClipboardDocumentList className="icon-md text-accent" />
           <div>
-            <h1 className="page-title">Auditoria del sistema</h1>
+            <h1 className="page-title">Auditoría del sistema</h1>
             <p className="page-subtitle">Registro completo de acciones. Total: {totalElements}</p>
           </div>
         </div>
