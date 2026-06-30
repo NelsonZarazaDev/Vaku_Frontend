@@ -1,5 +1,4 @@
 import React from "react";
-import ButtonEmailPriority from "../../components/buttonEmailPriority/ButtonEmailPriority";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import UsePriority from "../../hooks/priority/UsePriority";
 
@@ -13,7 +12,6 @@ export default function Priority() {
     totalElements,
     loading,
     fetchPriority,
-    notifyEmail,
   } = UsePriority(10);
 
   return (
@@ -42,7 +40,7 @@ export default function Priority() {
             <option value={20}>20</option>
             <option value={50}>50</option>
           </select>
-          <ButtonEmailPriority onNotify={notifyEmail} />
+          {/* <ButtonEmailPriority onNotify={notifyEmail} /> */}
         </div>
       </header>
 
