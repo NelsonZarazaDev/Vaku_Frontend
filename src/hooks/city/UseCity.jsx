@@ -10,9 +10,14 @@ export default function UseCity() {
   const [cityData, setCityData] = useState([]);
   const depaId = useDepartmentStore((state) => state.depaId);
 
-  const fetchCityData = async () => {
+  const fetchCityData = async (selectedDepaId = depaId) => {
+    if (!selectedDepaId) {
+      setCityData([]);
+      return;
+    }
+
     try {
-      const url = `${API.APICITY}/${depaId}`;
+      const url = `${API.APICITY}/${selectedDepaId}`;
       const result = await axios.get(url, { headers });
       setCityData(result.data);
     } catch (error) {

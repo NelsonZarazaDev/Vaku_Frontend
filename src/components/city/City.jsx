@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import UseCity from "../../hooks/city/UseCity";
 import useDepartmentStore from "../../store/Department/useDepartmentStore";
 import { showToast } from "../../components/notifyToast/NotifyToast";
 
-export default function City({ name, id, value, onChange }) {
+export default function City({ name, id, value, onChange, departmentId }) {
   const { cityData, fetchCityData } = UseCity();
-  const depaId = useDepartmentStore((state) => state.depaId);
+  const storedDepaId = useDepartmentStore((state) => state.depaId);
+  const depaId = departmentId || storedDepaId;
+
+  useEffect(() => {
+    if (depaId) {
+      fetchCityData(depaId);
+    }
+  }, [depaId]);
 
   return (
     <div className="w-full">

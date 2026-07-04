@@ -5,7 +5,15 @@ import City from "../../components/city/City";
 import Sex from "../../components/sex/Sex";
 
 export default function RegisterFatherSon() {
-  const { fatherSonData, onInputChange, onSubmit } = UseRegisterFatherSon();
+  const {
+    fatherSonData,
+    existingParent,
+    parentDepartmentId,
+    onInputChange,
+    onParentDepartmentChange,
+    onParentDocumentBlur,
+    onSubmit,
+  } = UseRegisterFatherSon();
 
   return (
     <section className="space-y-4">
@@ -57,9 +65,15 @@ export default function RegisterFatherSon() {
               </div>
 
               <div className="grid gap-3 sm:grid-cols-2">
-                <input className="form-input text-sm" type="text" name="0-persDocument" id="0-persDocument" value={fatherSonData[0].persDocument} onChange={onInputChange} placeholder="Documento" />
+                <input className="form-input text-sm" type="text" name="0-persDocument" id="0-persDocument" value={fatherSonData[0].persDocument} onChange={onInputChange} onBlur={onParentDocumentBlur} placeholder="Documento" />
                 <input className="form-input text-sm" type="text" name="0-persPhone" id="0-persPhone" value={fatherSonData[0].persPhone} onChange={onInputChange} placeholder="Teléfono" />
               </div>
+
+              {existingParent && (
+                <p className="typo-caption rounded-lg border border-dark-cyan/20 bg-secondary px-3 py-2 text-dark-cyan">
+                  Acudiente registrado encontrado. Se asociara el nuevo niño a este acudiente.
+                </p>
+              )}
 
               <input className="form-input text-sm" type="email" name="0-persEmail" id="0-persEmail" value={fatherSonData[0].persEmail} onChange={onInputChange} placeholder="Correo" />
 
@@ -80,8 +94,19 @@ export default function RegisterFatherSon() {
               </div>
 
               <div className="grid gap-3 sm:grid-cols-2">
-                <Department />
-                <City name={`0-cityId`} id={`0-cityId`} value={fatherSonData[0].citys.cityId} onChange={onInputChange} />
+                <Department
+                  name="0-departmentId"
+                  id="0-departmentId"
+                  value={parentDepartmentId}
+                  onChange={onParentDepartmentChange}
+                />
+                <City
+                  name={`0-cityId`}
+                  id={`0-cityId`}
+                  value={fatherSonData[0].citys.cityId || ""}
+                  onChange={onInputChange}
+                  departmentId={parentDepartmentId}
+                />
               </div>
 
               <input className="form-input text-sm" type="text" name="0-persAddress" id="0-persAddress" onChange={onInputChange} value={fatherSonData[0].persAddress} placeholder="Barrio / Casa" />
@@ -98,3 +123,4 @@ export default function RegisterFatherSon() {
     </section>
   );
 }
+
