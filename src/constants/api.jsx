@@ -11,6 +11,7 @@ export const API = {
   APIPERSONBYDOCUMENT: `${API_BASE_URL}/persons/document`,
   APIDEPARTMENT: `${API_BASE_URL}/departments`,
   APICITY: `${API_BASE_URL}/citys`,
+  APICHILDREN: `${API_BASE_URL}/children`,
   APIGETALLEMPLOYEE: `${API_BASE_URL}/employee`,
   APIEDITEMPLOYEE: `${API_BASE_URL}/employee`,
   APIINFOCHILDREN: `${API_BASE_URL}/vaccinesCard/info`,

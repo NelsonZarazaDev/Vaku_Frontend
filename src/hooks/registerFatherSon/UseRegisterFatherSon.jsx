@@ -14,7 +14,7 @@ export default function UseRegisterFatherSon() {
       persDocument: "",
       persSex: "",
       persAddress: "",
-      persDateBirth: "1974-09-03",
+      persDateBirth: "",
       persRole: "",
       persEmail: "",
       persPhone: "",
@@ -53,7 +53,7 @@ export default function UseRegisterFatherSon() {
     e.preventDefault();
 
     try {
-      const documentsToValidate = [fatherSonData[0]?.persDocument?.trim()].filter(Boolean);
+      const documentsToValidate = [fatherSonData[1]?.persDocument?.trim()].filter(Boolean);
 
       for (const document of documentsToValidate) {
         const existingPerson = await findPersonByDocument(document, headers);

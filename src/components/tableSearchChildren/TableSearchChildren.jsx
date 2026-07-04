@@ -7,12 +7,13 @@ import { ROUTE_PATHS } from "../../constants/routePath";
 export default function TableSearchChildren({ data }) {
   const { setChildrenAuthStore } = useChildrenAuthStore();
   const navigate = useNavigate();
+  const rows = Array.isArray(data) ? data : data ? [data] : [];
 
-  const goToVaccinationCard = (mode) => {
+  const goToVaccinationCard = (mode, child) => {
     setChildrenAuthStore({
-      persDocument: data.childDocument,
-      idChildren: data.chilId,
-      emailParent: data.parentEmail,
+      persDocument: child.childDocument,
+      idChildren: child.chilId,
+      emailParent: child.parentEmail,
     });
     navigate(`${ROUTE_PATHS.HOME}/${ROUTE_PATHS.VACCINATIONCARD}`, {
       state: { mode },
@@ -32,34 +33,36 @@ export default function TableSearchChildren({ data }) {
             </tr>
           </thead>
           <tbody>
-            {data ? (
-              <tr>
-                <td>
-                  {data.childNames} {data.childLastNames}
-                </td>
-                <td>{data.childDocument}</td>
-                <td>{data.parentBirthDate}</td>
-                <td>
-                  <div className="flex items-center justify-center gap-2">
-                    <button
-                      onClick={() => goToVaccinationCard("view")}
-                      className="rounded-lg border border-border p-1.5 icon-sm text-dark-cyan hover:bg-secondary"
-                      type="button"
-                      title="Ver esquema"
-                    >
-                      <FiEye />
-                    </button>
-                    <button
-                      onClick={() => goToVaccinationCard("edit")}
-                      className="rounded-lg border border-border p-1.5 icon-sm text-dark-cyan hover:bg-secondary"
-                      type="button"
-                      title="Editar esquema"
-                    >
-                      <FiEdit2 />
-                    </button>
-                  </div>
-                </td>
-              </tr>
+            {rows.length > 0 ? (
+              rows.map((child) => (
+                <tr key={child.chilId || child.childDocument}>
+                  <td>
+                    {child.childNames} {child.childLastNames}
+                  </td>
+                  <td>{child.childDocument}</td>
+                  <td>{child.childBirthDate}</td>
+                  <td>
+                    <div className="flex items-center justify-center gap-2">
+                      <button
+                        onClick={() => goToVaccinationCard("view", child)}
+                        className="rounded-lg border border-border p-1.5 icon-sm text-dark-cyan hover:bg-secondary"
+                        type="button"
+                        title="Ver esquema"
+                      >
+                        <FiEye />
+                      </button>
+                      <button
+                        onClick={() => goToVaccinationCard("edit", child)}
+                        className="rounded-lg border border-border p-1.5 icon-sm text-dark-cyan hover:bg-secondary"
+                        type="button"
+                        title="Editar esquema"
+                      >
+                        <FiEdit2 />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
             ) : (
               <tr>
                 <td colSpan="4" className="text-center typo-caption">

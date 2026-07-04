@@ -148,9 +148,4 @@ const linksArray = [
     roles: ["jefe de enfermeria"],
     to: ROUTE_PATHS.AUDIT,
   },
-  {
-    label: "Inventario",
-    roles: ["jefe de enfermeria"],
-    to: ROUTE_PATHS.INVENTORY,
-  },
 ];

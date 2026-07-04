@@ -69,10 +69,14 @@ export default function CardsInfoVaccinationCard() {
             icon={<HiOutlineUsers />}
             span="full"
           />
-          <InfoCard label="Nacimiento" value={info.parentBirthDate} icon={<HiOutlineCalendarDays />} />
+          <InfoCard label="Documento" value={info.childDocument} icon={<HiOutlineUserCircle />} />
+          <InfoCard label="Nacimiento" value={info.childBirthDate} icon={<HiOutlineCalendarDays />} />
           <InfoCard label="Sexo" value={info.childSex} icon={<HiOutlineHeart />} compact />
+          <InfoCard label="Dirección" value={info.childAddress} icon={<HiOutlineMapPin />} />
           <InfoCard label="Municipio" value={info.childCity} icon={<HiOutlineMapPin />} />
           <InfoCard label="Departamento" value={info.childDepartment} icon={<HiOutlineMapPin />} />
+          <InfoCard label="Teléfono" value={info.childPhone} icon={<HiOutlinePhone />} />
+          <InfoCard label="Correo" value={info.childEmail} icon={<HiOutlineEnvelope />} />
         </div>
       </article>
 
@@ -96,6 +100,8 @@ export default function CardsInfoVaccinationCard() {
             icon={<HiOutlineUsers />}
             span="full"
           />
+          <InfoCard label="Documento" value={info.parentDocument} icon={<HiOutlineUserCircle />} />
+          <InfoCard label="Nacimiento" value={info.parentBirthDate} icon={<HiOutlineCalendarDays />} />
           <InfoCard label="Teléfono" value={info.parentPhone} icon={<HiOutlinePhone />} />
           <InfoCard
             label="Correo"
@@ -109,6 +115,8 @@ export default function CardsInfoVaccinationCard() {
             icon={<HiOutlineMapPin />}
             span="full"
           />
+          <InfoCard label="Municipio" value={info.parentCity} icon={<HiOutlineMapPin />} />
+          <InfoCard label="Departamento" value={info.parentDepartment} icon={<HiOutlineMapPin />} />
         </div>
       </article>
     </div>
