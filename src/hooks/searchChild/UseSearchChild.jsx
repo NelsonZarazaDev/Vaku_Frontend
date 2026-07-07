@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { getAuthHeader } from "../../constants/authHeader";
 import { API } from "../../constants/api";
 import axios from "axios";
@@ -14,10 +14,19 @@ export default function UseSearchChild({ onResult }) {
   };
 
   const fetchChildren = useCallback(async (search = "", notify = false) => {
+    const cleanSearch = search.trim();
+
+    if (!cleanSearch) {
+      onResult([]);
+      if (notify) {
+        showToast("Ingrese el documento del niño", "error");
+      }
+      return;
+    }
+
     try {
       const headers = getAuthHeader();
-      const cleanSearch = search.trim();
-      const query = cleanSearch ? `?document=${encodeURIComponent(cleanSearch)}` : "";
+      const query = `?document=${encodeURIComponent(cleanSearch)}`;
       const result = await axios.get(`${API.APICHILDREN}${query}`, { headers });
       const rows = Array.isArray(result.data) ? result.data : [];
 
@@ -39,10 +48,6 @@ export default function UseSearchChild({ onResult }) {
     e.preventDefault();
     await fetchChildren(searchData.search, true);
   };
-
-  useEffect(() => {
-    fetchChildren();
-  }, [fetchChildren]);
 
   return { searchData, onInputChange, onSubmit };
 }
