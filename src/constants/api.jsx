@@ -1,4 +1,4 @@
-const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
+const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || "https://backend-vaku.onrender.com";
 export const API_BASE_URL = rawBaseUrl.replace(/\/+$/, "");
 
 export const API = {
